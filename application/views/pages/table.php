@@ -1,6 +1,6 @@
 <div class="card shadow py-2">
     <div class="card-body">
-        <a href="<?php echo base_url()."pages/form" ?>" class="btn btn-primary mb-3"> <span class="fa fa-plus-circle"></span> Add New Record</a>
+        <a href="<?php echo base_url()."pages/form" ?>" class="btn btn-primary mb-3"> <span class="fa fa-plus-circle"></span> Tambah Barang</a>
         <div class="table-responsive">
             <table class="table table-striped table-hover table-bordered datatable table-custom">
                 <thead>

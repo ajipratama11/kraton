@@ -4,7 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Pages extends CI_Controller {
     function __construct(){
         parent::__construct();
-        $this->icon = "fa-desktop";
+		$this->icon = "fa-desktop";
+		$this->load->model('M_barang');
 	}
 	public function home()
 	{
@@ -24,4 +25,15 @@ class Pages extends CI_Controller {
 	public function login(){
 		$this->load->view("auth/login");
 	}
+
+
+	public function tambah_barang()
+    {
+            $this->M_barang->addBarang();
+            $this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Barang Berhasil Disimpan :)</div>');
+            redirect('Pages/table');
+        
+    }
+
+	
 }

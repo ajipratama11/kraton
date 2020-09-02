@@ -2,34 +2,35 @@
     <div class="card-body">
     <a href="<?php echo base_url()."pages/table" ?>" class="btn btn-success mb-3"> <span class="fa fa-arrow-alt-circle-left"></span> Back to table</a>
     <hr>
-        <form action="">
-            <label>Input Text</label>
-            <input type="text" class="form-control">
+        <form action="<?= base_url('Pages/tmbah_barang'); ?>" method="POST" enctype="multipart/form-data">
+        <?php $yahoo = md5(uniqid(rand(), true)) ?>
+            <label>Nama Barang</label>
+            <input name="id_barang" type="hidden" value="<?= $yahoo ?>" placeholder="Nama Barang" class="form-control">
+            <input name="nama_barang" type="text" placeholder="Nama Barang" class="form-control">
             <br>
-            <label>Select</label>
-            <select name="" id="" class="form-control select2">
-                <option value="">---Option---</option>
-                <option value="">Option 1</option>
-                <option value="">Option 2</option>
+            <label>Kategori Barang</label>
+            <select name="id_kategori" id="" class="form-control select2">
+                <option value="1">ATK</option>
+                <option value="2">Makanan</option>
+                <option value="3">Minuman</option>
             </select>
             <br>
             <br>
-            <label>Datapicker</label>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><span class="fa fa-calendar"></span></span>
-                </div>
-                <input type="text" class="datepicker form-control">
-            </div>
+            <label>Harga Beli</label>
+            <input name="harga_beli" type="number" placeholder="Harga Beli" class="form-control">
+            <br>
+            <label>Harga Jual</label>
+            <input name="harga_jual" type="number" placeholder="Harga Jual" class="form-control">
+            <br>
             <label>Upload File</label>
             <div class="custom-file">
-                <input type="file" class="custom-file-input" id="customFile">
+                <input name="gambar" type="file" class="custom-file-input" id="customFile">
                 <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
             <br>
             <br>
-            <label>Textarea</label>
-            <textarea  cols="30" rows="5" class="form-control"></textarea>
+            <label>Keterangan</label>
+            <textarea name="keterangan"  cols="30" rows="5" class="form-control"></textarea>
             <br>
             <?php 
                 $this->load->view("common/btn");

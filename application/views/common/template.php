@@ -69,12 +69,12 @@
            <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
               <i class="fas fa-fw fa-desktop"></i>
-              <span>Menu 1</span>
+              <span>Data</span>
             </a>
             <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
               <div class="py-2 collapse-inner rounded">
-                <a class="collapse-item" href="">Menu 1</a>
-                <a class="collapse-item" href="">Menu 2</a>
+                <a class="collapse-item" href="">Barang</a>
+                <a class="collapse-item" href="">Kategori</a>
                 <a class="collapse-item" href="">Menu 3</a>
               </div>
             </div>
