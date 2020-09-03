@@ -1,11 +1,10 @@
 <div class="card shadow py-2">
     <div class="card-body">
-    <a href="<?php echo base_url()."pages/table" ?>" class="btn btn-success mb-3"> <span class="fa fa-arrow-alt-circle-left"></span> Back to table</a>
+    <a href="<?php echo base_url()."pages/table_barang" ?>" class="btn btn-success mb-3"> <span class="fa fa-arrow-alt-circle-left"></span> Back to table</a>
     <hr>
-        <form action="<?= base_url('Pages/tmbah_barang'); ?>" method="POST" enctype="multipart/form-data">
+        <form action="<?= base_url('Pages/tambah_barang'); ?>" method="POST" enctype="multipart/form-data">
         <?php $yahoo = md5(uniqid(rand(), true)) ?>
             <label>Nama Barang</label>
-            <input name="id_barang" type="hidden" value="<?= $yahoo ?>" placeholder="Nama Barang" class="form-control">
             <input name="nama_barang" type="text" placeholder="Nama Barang" class="form-control">
             <br>
             <label>Kategori Barang</label>

@@ -1,17 +1,12 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class M_barang   extends CI_Model
+class M_kategori   extends CI_Model
 {
-    private $_table = 'barang';
+    private $_table = 'kategori';
 
-    public $id_barang;
-    public $nama_barang;
     public $id_kategori;
-    public $harga_beli;
-    public $harga_jual;
-    public $gambar;
-    public $keterangan  ;
+    public $nama_kategori;
 
     function __construct()
     {
@@ -31,9 +26,9 @@ class M_barang   extends CI_Model
         ];
     }
 
-    public function get_barang()
+    public function get_kategori()
     {
-        return $this->db->query("SELECT * FROM barang JOIN kategori ON barang.id_kategori=kategori.id_kategori")->result();
+        return $this->db->get($this->_table)->result();
     }
 
     public function get_by_id($no_transaksi)
@@ -49,11 +44,11 @@ class M_barang   extends CI_Model
     {
         return $this->db->get_where($this->_table, ['status_2' => 'Terhapus'])->result();
     }
-    function get_idbarang(){
-        $this->db->select('RIGHT(barang.id_barang,4) as kode', FALSE);
-        $this->db->order_by('id_barang','DESC');    
+    function get_idkategori(){
+        $this->db->select('RIGHT(kategori.id_kategori,4) as kode', FALSE);
+        $this->db->order_by('id_kategori','DESC');    
         $this->db->limit(1);    
-        $query = $this->db->get('barang');     
+        $query = $this->db->get('kategori');     
         if($query->num_rows() <> 0){      
       
          $data = $query->row();      
@@ -64,19 +59,14 @@ class M_barang   extends CI_Model
          $kode = 1;    
         }
         $kodemax = str_pad($kode, 4, "0", STR_PAD_LEFT); 
-        $kodejadi = "RJ".$kodemax;  
+        $kodejadi = "KB".$kodemax;  
         return $kodejadi;
   }
-    public function addBarang($id_barang)
+    public function addKategori($id_kategori)
     {
         $post = $this->input->post();
-        $this->id_barang = $id_barang;
-        $this->nama_barang = $post['nama_barang'];
-        $this->id_kategori = $post['id_kategori'];
-        $this->harga_jual = $post['harga_jual'];
-        $this->harga_beli = $post['harga_beli'];
-        $this->gambar = $this->_uploadImage();
-        $this->keterangan = $post['keterangan'];
+        $this->id_kategori = $id_kategori;
+        $this->nama_kategori = $post['nama_kategori'];
         $this->db->insert($this->_table, $this);
     }
 
@@ -86,38 +76,6 @@ class M_barang   extends CI_Model
         $this->no_transaksi = $post['no_transaksi'];
         $this->no_rekdis = $post['no_rekdis'];
         $this->nama_pasien = $post['nama_pasien'];
-        $this->jenis_pelayanan = $post['jenis_pelayanan'];
-        $this->asal_ruangan = $post['asal_ruangan'];
-        $this->tgl_cek = $post['tgl_cek'];
-        $this->nama_form = $post['nama_form'];
-        $this->catatan = $post['catatan'];
-        $this->card_x = $post['card_x'];
-        $this->inform_consent = $post['inform_consent'];
-        $this->pemantauan = $post['pemantauan'];
-        $this->pengkajian_kadar = $post['pengkajian_kadar'];
-        $this->sbar = $post['sbar'];
-        $this->skrining = $post['skrining'];
-        $this->assesmen_awal = $post['assesmen_awal'];
-        $this->transfer_ruangan = $post['transfer_ruangan'];
-        $this->resume = $post['resume'];
-        $this->ringkasan_mk = $post['ringkasan_mk'];
-        $this->assesmen_dpjp = $post['assesmen_dpjp'];
-        $this->pengkajian_bayi = $post['pengkajian_bayi'];
-        $this->pengkajian_perawat = $post['pengkajian_perawat'];
-        $this->asuhan_gizi = $post['asuhan_gizi'];
-        $this->perencanaan_pasien_pulang = $post['perencanaan_pasien_pulang'];
-        $this->obs_tanda_vital = $post['obs_tanda_vital'];
-        $this->obs_suhu_nadi = $post['obs_suhu_nadi'];
-        $this->laporan_operasi = $post['laporan_operasi'];
-        $this->assesmen_prabedah = $post['assesmen_prabedah'];
-        $this->assesmen_praanastesi = $post['assesmen_praanastesi'];
-        $this->assesmen_keperawatan = $post['assesmen_keperawatan'];
-        $this->timbang_terima = $post['timbang_terima'];
-        $this->set_marking = $post['set_marking'];
-        $this->ceklist_keselamatan = $post['ceklist_keselamatan'];
-        $this->ppi = $post['ppi'];
-        $this->status = $status;
-        $this->status_2 = $post['status_2'];
         $this->db->update($this->_table, $this, array("no_transaksi" => $post['no_transaksi']));
     }
 

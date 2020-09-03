@@ -73,8 +73,8 @@
             </a>
             <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
               <div class="py-2 collapse-inner rounded">
-                <a class="collapse-item" href="">Barang</a>
-                <a class="collapse-item" href="">Kategori</a>
+                <a class="collapse-item" href="<?= base_url('Pages/table_barang'); ?>">Barang</a>
+                <a class="collapse-item" href="<?= base_url('Pages/table_kategori'); ?>">Kategori</a>
                 <a class="collapse-item" href="">Menu 3</a>
               </div>
             </div>
