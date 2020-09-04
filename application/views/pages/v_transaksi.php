@@ -1,9 +1,6 @@
 <div class="card shadow py-2">
     <div class="card-body">
-        <form action="<?= base_url('Pages/tambah_kategori'); ?>" method="POST">
-            <input name="nama_kategori" type="text" placeholder="Nama Barang" class="form-control">
-            <button type="submit" class="btn btn-primary mb-3"> <span class="fa fa-plus-circle"></span> Tambah Barang</button>
-        </form>
+        <a href="<?php echo base_url() . "pages/form_tambahbarang" ?>" class="btn btn-primary mb-3"> <span class="fa fa-plus-circle"></span> Tambah Barang</a>
         <div class="table-responsive">
             <table class="table table-striped table-hover table-bordered datatable table-custom">
                 <thead>
@@ -24,9 +21,9 @@
                             <td>
                                 <?php
                                 $dropdown['link'] = array(
-                                    "Edit" => array('openModal', base_url() . "pages/edit_kategori/".$g->id_kategori),
+                                    "Edit" => array('openModal', base_url()),
                                     "Detail" => base_url(),
-                                    "Delete" => array('confirm', base_url('Pages/delete_kategori/'.$g->id_kategori))
+                                    "Delete" => array('confirm', base_url())
                                 );
                                 $this->load->view("common/dropdown", $dropdown);
                                 ?>

@@ -1,27 +1,19 @@
-$(document).ready(function() {
+$(document).ready(function () {
 	var baseUrl = $("#baseUrl").data("url");
 	$(".datatable").DataTable();
 	$(".select2").select2();
 	$(".datepicker").datepicker({
-		format: "yyyy/mm/dd"
+		format: "yyyy/mm/dd",
 	});
-	$("button[type='reset']").click(function() {
-		$(".select2")
-			.val(null)
-			.trigger("change");
+	$("button[type='reset']").click(function () {
+		$(".select2").val(null).trigger("change");
 	});
-	$(".custom-file-input").on("change", function() {
-		var fileName = $(this)
-			.val()
-			.split("\\")
-			.pop();
-		$(this)
-			.siblings(".custom-file-label")
-			.addClass("selected")
-			.html(fileName);
+	$(".custom-file-input").on("change", function () {
+		var fileName = $(this).val().split("\\").pop();
+		$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 	});
 
-	$(".submitConfirm").submit(function(e) {
+	$(".submitConfirm").submit(function (e) {
 		var id = $(this).attr("id");
 		e.preventDefault();
 		swal(
@@ -32,16 +24,16 @@ $(document).ready(function() {
 				showCancelButton: true,
 				confirmButtonColor: "#DD6B55",
 				confirmButtonText: "Perbarui",
-				closeOnConfirm: false
+				closeOnConfirm: false,
 			},
-			function() {
+			function () {
 				$("#" + id)
 					.unbind("submit")
 					.submit();
 			}
 		);
 	});
-	$(".confirm").click(function(e) {
+	$(".confirm").click(function (e) {
 		e.preventDefault();
 		var url = $(this).attr("href");
 		swal(
@@ -52,11 +44,22 @@ $(document).ready(function() {
 				showCancelButton: true,
 				confirmButtonColor: "#DD6B55",
 				confirmButtonText: "Hapus",
-				closeOnConfirm: false
+				closeOnConfirm: false,
 			},
-			function() {
+			function () {
 				window.location = url;
 			}
 		);
+	});
+	$(".openModal").click(function (e) {
+		e.preventDefault();
+		var url = $(this).attr("href");
+		$.ajax({
+			url: url,
+			success: function (data) {
+				$(".place-modal").html(data);
+				$(".modalJS").modal("show");
+			},
+		});
 	});
 });

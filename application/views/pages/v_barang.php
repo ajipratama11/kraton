@@ -11,6 +11,7 @@
                         <td>Kategori</td>
                         <td>Harga Beli</td>
                         <td>Harga Jual</td>
+                        <td>Stok</td>
                         <td>Keterangan</td>
                         <td>Option</td>
                     </tr>
@@ -25,13 +26,14 @@
                         <td><?= $g->nama_kategori ?></td>
                         <td><?= $g->harga_beli ?></td>
                         <td><?= $g->harga_jual ?></td>
+                        <td><?= $g->stok ?></td>
                         <td><?= $g->keterangan ?></td>
                         <td>
                             <?php 
                                 $dropdown['link'] = array(
-                                    "Edit" => base_url(),
-                                    "Detail" => base_url(),
-                                    "Delete" => array(base_url()) 
+                                    "Edit" => base_url('Pages/form_edit/'.$g->id_barang),
+                                    "Tambah Stok" => array('openModal', base_url() . "pages/tambah_stok/".$g->id_barang),
+                                    "Delete" => base_url('Pages/delete_barang/'.$g->id_barang)
                                 );
                                 $this->load->view("common/dropdown", $dropdown);
                             ?>

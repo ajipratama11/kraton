@@ -3,12 +3,12 @@
         Option
     </button>
     <div class="dropdown-menu">
-        <?php 
-            foreach ($link as $key => $value) {
-                $confirm = is_array($value) ? "confirm" : "";
-                $url = is_array($value) ? $value[0] : $value;
-                echo "<a href='$url' class='dropdown-item $confirm'>$key</a>";
-            }
+        <?php
+        foreach ($link as $key => $value) {
+            $class = is_array($value) ? $value[0] : "";
+            $url = is_array($value) ? $value[1] : $value;
+            echo "<a href='$url' class='dropdown-item $class'>$key</a>";
+        }
         ?>
     </div>
 </div>

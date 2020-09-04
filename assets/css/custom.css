@@ -33,6 +33,17 @@ body {
 	position: relative;
 	padding: 40px;
 }
+.box-login .body .intro {
+	border-left: 2px solid #4099ff;
+	padding-left: 15px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-weight: bold;
+	font-size: 15px;
+}
+.box-login .body .intro p span {
+	color: #4099ff;
+}
 .box-login .top p {
 	color: white;
 	position: relative;

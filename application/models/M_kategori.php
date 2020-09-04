@@ -79,9 +79,9 @@ class M_kategori   extends CI_Model
         $this->db->update($this->_table, $this, array("no_transaksi" => $post['no_transaksi']));
     }
 
-    public function delete_cek_kelengkapan($no_transaksi)
+    public function deleteKategori($id_kategori)
     {
-        return $this->db->delete($this->_table, array("no_transaksi" => $no_transaksi));
+         $this->db->query("DELETE kategori, barang FROM kategori INNER JOIN barang ON kategori.id_kategori=barang.id_kategori WHERE kategori.id_kategori='$id_kategori'");
     }
 
     public function hapus_sementara($status, $no_transaksi)

@@ -9,9 +9,9 @@
             <br>
             <label>Kategori Barang</label>
             <select name="id_kategori" id="" class="form-control select2">
-                <option value="1">ATK</option>
-                <option value="2">Makanan</option>
-                <option value="3">Minuman</option>
+                <?php foreach($kategori as $g) { ?>
+                <option value="<?= $g->id_kategori ?>"><?= $g->nama_kategori ?></option>
+                <?php } ?>
             </select>
             <br>
             <br>
@@ -20,6 +20,9 @@
             <br>
             <label>Harga Jual</label>
             <input name="harga_jual" type="number" placeholder="Harga Jual" class="form-control">
+            <br>
+            <label>Stok</label>
+            <input name="stok" type="number" placeholder="Stok" class="form-control">
             <br>
             <label>Upload File</label>
             <div class="custom-file">
