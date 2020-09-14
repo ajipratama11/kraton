@@ -5,12 +5,10 @@ class M_barang   extends CI_Model
 {
     private $_table = 'barang';
 
-    public $id_barang;
+    public $kode_barang;
     public $nama_barang;
     public $id_kategori;
-    public $harga_beli;
     public $harga_jual;
-    public $gambar;
     public $keterangan  ;
 
     function __construct()
@@ -50,8 +48,8 @@ class M_barang   extends CI_Model
         return $this->db->get_where($this->_table, ['status_2' => 'Terhapus'])->result();
     }
     function get_idbarang(){
-        $this->db->select('RIGHT(barang.id_barang,4) as kode', FALSE);
-        $this->db->order_by('id_barang','DESC');    
+        $this->db->select('RIGHT(barang.kode_barang,4) as kode', FALSE);
+        $this->db->order_by('kode_barang','DESC');    
         $this->db->limit(1);    
         $query = $this->db->get('barang');     
         if($query->num_rows() <> 0){      
@@ -67,63 +65,32 @@ class M_barang   extends CI_Model
         $kodejadi = "RJ".$kodemax;  
         return $kodejadi;
   }
-    public function addBarang($id_barang)
+    public function addBarang($kode_barang)
     {
         $post = $this->input->post();
-        $this->id_barang = $id_barang;
+        $this->kode_barang = $kode_barang;
         $this->nama_barang = $post['nama_barang'];
         $this->id_kategori = $post['id_kategori'];
         $this->harga_jual = $post['harga_jual'];
-        $this->harga_beli = $post['harga_beli'];
-        $this->gambar = $this->_uploadImage();
+        $this->stok = $post['stok'];
         $this->keterangan = $post['keterangan'];
         $this->db->insert($this->_table, $this);
     }
 
-    public function update_cek_kelengkapan($status)
+    public function updateBarang($kode_barang)
     {
         $post = $this->input->post();
-        $this->no_transaksi = $post['no_transaksi'];
-        $this->no_rekdis = $post['no_rekdis'];
-        $this->nama_pasien = $post['nama_pasien'];
-        $this->jenis_pelayanan = $post['jenis_pelayanan'];
-        $this->asal_ruangan = $post['asal_ruangan'];
-        $this->tgl_cek = $post['tgl_cek'];
-        $this->nama_form = $post['nama_form'];
-        $this->catatan = $post['catatan'];
-        $this->card_x = $post['card_x'];
-        $this->inform_consent = $post['inform_consent'];
-        $this->pemantauan = $post['pemantauan'];
-        $this->pengkajian_kadar = $post['pengkajian_kadar'];
-        $this->sbar = $post['sbar'];
-        $this->skrining = $post['skrining'];
-        $this->assesmen_awal = $post['assesmen_awal'];
-        $this->transfer_ruangan = $post['transfer_ruangan'];
-        $this->resume = $post['resume'];
-        $this->ringkasan_mk = $post['ringkasan_mk'];
-        $this->assesmen_dpjp = $post['assesmen_dpjp'];
-        $this->pengkajian_bayi = $post['pengkajian_bayi'];
-        $this->pengkajian_perawat = $post['pengkajian_perawat'];
-        $this->asuhan_gizi = $post['asuhan_gizi'];
-        $this->perencanaan_pasien_pulang = $post['perencanaan_pasien_pulang'];
-        $this->obs_tanda_vital = $post['obs_tanda_vital'];
-        $this->obs_suhu_nadi = $post['obs_suhu_nadi'];
-        $this->laporan_operasi = $post['laporan_operasi'];
-        $this->assesmen_prabedah = $post['assesmen_prabedah'];
-        $this->assesmen_praanastesi = $post['assesmen_praanastesi'];
-        $this->assesmen_keperawatan = $post['assesmen_keperawatan'];
-        $this->timbang_terima = $post['timbang_terima'];
-        $this->set_marking = $post['set_marking'];
-        $this->ceklist_keselamatan = $post['ceklist_keselamatan'];
-        $this->ppi = $post['ppi'];
-        $this->status = $status;
-        $this->status_2 = $post['status_2'];
-        $this->db->update($this->_table, $this, array("no_transaksi" => $post['no_transaksi']));
+		$this->kode_barang = $kode_barang;
+        $this->nama_barang = $post['nama_barang'];
+        $this->id_kategori = $post['id_kategori'];
+        $this->harga_jual = $post['harga_jual'];
+        $this->keterangan = $post['keterangan'];
+        $this->db->update($this->_table, $this, array("kode_barang" => $kode_barang));
     }
 
-    public function deleteBarang($id_barang)
+    public function deleteBarang($kode_barang)
     {
-        return $this->db->delete($this->_table, array("id_barang" => $id_barang));
+        return $this->db->delete($this->_table, array("kode_barang" => $kode_barang));
     }
 
     public function hapus_sementara($status, $no_transaksi)

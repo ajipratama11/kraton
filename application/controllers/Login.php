@@ -6,6 +6,12 @@ class Login extends CI_Controller{
         parent::__construct();
         $this->load->model('M_login');
         $this->load->library('form_validation');
+        if ($this->session->userdata('status') == "login") {
+            echo "<script>
+                alert('Anda harus login terlebih dahulu');
+                window.location.href = '" . base_url('Pages/table_barang') . "';
+            </script>"; //Url Logi
+        }
     }
     public function index() {
         $this->load->view('pages/v_login');
@@ -151,13 +157,8 @@ class Login extends CI_Controller{
 
 
     public function logout() {
-        $this->session->unset_userdata('email');
-        $this->session->unset_userdata('id_level');
-
-        echo "<script>
-                alert('Berhasil logged out!');
-                window.location.href = '".base_url('login')."';
-            </script>";//Url tujuan
+        $this->session->unset_userdata('status');
+		redirect(base_url('Login'));
 
     }
 

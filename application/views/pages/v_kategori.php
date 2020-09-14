@@ -5,6 +5,9 @@
             <button type="submit" class="btn btn-primary mb-3"> <span class="fa fa-plus-circle"></span> Tambah Barang</button>
         </form>
         <div class="table-responsive">
+        <?php echo $this->session->flashdata('tambahkategori'); ?>
+        <?php echo $this->session->flashdata('deletekategori'); ?>
+        <?php echo $this->session->flashdata('updatekategori'); ?>
             <table class="table table-striped table-hover table-bordered datatable table-custom">
                 <thead>
                     <tr>
@@ -24,7 +27,7 @@
                             <td>
                                 <?php
                                 $dropdown['link'] = array(
-                                    "Edit" => array('openModal', base_url() . "pages/edit_kategori/".$g->id_kategori),
+                                    "Edit" => array('openModal', base_url() ."pages/edit_kategori/".$g->id_kategori),
                                     "Detail" => base_url(),
                                     "Delete" => array('confirm', base_url('Pages/delete_kategori/'.$g->id_kategori))
                                 );

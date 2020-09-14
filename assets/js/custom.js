@@ -62,4 +62,75 @@ $(document).ready(function () {
 			},
 		});
 	});
+	function setHarga(thisParam) {
+		var thisVal = thisParam.find(":selected").data("idr");
+		var target = thisParam.data("target");
+		$(target).val(thisVal);
+	}
+	$(".setHarga").change(function () {
+		setHarga($(this));
+	});
+	$(".addDetail").click(function (e) {
+		e.preventDefault();
+		var url = $(this).attr("href");
+		var counting = parseInt($(".loop-detail").attr("data-counting"));
+		counting++;
+
+		$.ajax({
+			url: url,
+			method: "get",
+			data: { counting: counting },
+			success: function (data) {
+				$(".loop-detail").append(data);
+				$(".loop-detail").attr("data-counting", counting);
+				$(".removeField").click(function (e) {
+					e.preventDefault();
+					var target = $(this).data("target");
+					counting--;
+					$(".loop-detail").attr("data-counting", counting);
+					$(".detail-field[data-id='" + target + "']").remove();
+					getTotal();
+				});
+				$(".select2").select2();
+				$(".qtyHarga").keyup(function () {
+					qtyHarga($(this));
+				});
+				$(".setHarga").change(function () {
+					setHarga($(this));
+				});
+			},
+		});
+	});
+	function qtyHarga(thisParam) {
+		var id = "#" + thisParam.attr("id");
+		var parent = thisParam.data("parent");
+		var subtotal = thisParam.data("subtotal");
+
+		var thisVal = parseInt($(id).val());
+		thisVal = isNaN(thisVal) ? 0 : thisVal;
+		var parentVal = parseInt($(parent).val());
+		var subtotalVal = thisVal * parentVal;
+		subtotalVal = isNaN(subtotalVal) ? thisVal : subtotalVal;
+		$(subtotal).val(subtotalVal);
+		getTotal();
+	}
+	function getTotal() {
+		var total = 0;
+		$(".subtotal").each(function () {
+			total = total + parseInt($(this).val());
+		});
+		$("#total").html(rupiah(total));
+	}
+	$(".qtyHarga").keyup(function () {
+		qtyHarga($(this));
+	});
+
+	function rupiah(nominal) {
+		var reverse = nominal.toString().split("").reverse().join(""),
+			ribuan = reverse.match(/\d{1,3}/g);
+		ribuan = ribuan.join(".").split("").reverse().join("");
+
+		// Cetak hasil
+		return ribuan;
+	}
 });

@@ -15,22 +15,13 @@
             </select>
             <br>
             <br>
-            <label>Harga Beli</label>
-            <input name="harga_beli" type="number" placeholder="Harga Beli" class="form-control">
-            <br>
             <label>Harga Jual</label>
             <input name="harga_jual" type="number" placeholder="Harga Jual" class="form-control">
             <br>
             <label>Stok</label>
             <input name="stok" type="number" placeholder="Stok" class="form-control">
             <br>
-            <label>Upload File</label>
-            <div class="custom-file">
-                <input name="gambar" type="file" class="custom-file-input" id="customFile">
-                <label class="custom-file-label" for="customFile">Choose file</label>
-            </div>
-            <br>
-            <br>
+            
             <label>Keterangan</label>
             <textarea name="keterangan"  cols="30" rows="5" class="form-control"></textarea>
             <br>

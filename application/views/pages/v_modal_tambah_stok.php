@@ -4,7 +4,6 @@ $id = $this->uri->segment(3); ?>
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form action="<?= base_url('Pages/aksitambah_stok'); ?>" method="POST">
-
                 <div class="modal-header">
                     <h5 class="modal-title">Modal title</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

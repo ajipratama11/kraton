@@ -54,6 +54,21 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
+          <a class="nav-link" href="<?php echo base_url() . 'transaksi/pembelian' ?>">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Pembelian Barang</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?php echo base_url() . 'transaksi/penjualan' ?>">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Penjualan Barang</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?php echo base_url() . 'transaksi/kas' ?>">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Kas</span></a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-desktop"></i>
             <span>Data</span>
@@ -62,20 +77,30 @@
             <div class="py-2 collapse-inner rounded">
               <a class="collapse-item" href="<?= base_url('Pages/table_barang'); ?>">Barang</a>
               <a class="collapse-item" href="<?= base_url('Pages/table_kategori'); ?>">Kategori</a>
-              <a class="collapse-item" href="">Menu 3</a>
             </div>
           </div>
         </li>
         <li class="nav-item">
           <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-desktop"></i>
-            <span>Menu</span>
+            <span>Laporan</span>
           </a>
           <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="py-2 collapse-inner rounded">
-              <a class="collapse-item" href="">Menu 1</a>
+              <a class="collapse-item" href="<?= base_url('Laporan/laporanpembelian'); ?>">Pembelian</a>
+              <a class="collapse-item" href="<?= base_url('Laporan/laporanpenjualan'); ?>">Penjualan</a>
             </div>
           </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?php echo base_url() . 'Laporan/laporanbukubesar' ?>">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Buku Besar</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?php echo base_url() . 'Laporan/laporanlabarugi' ?>">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Laba Rugi</span></a>
         </li>
 
 
