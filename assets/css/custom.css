@@ -340,7 +340,7 @@ label {
 }
 
 .color-blue {
-    color: #42a5f5;
+    color: #42a5f5  !important;
 }
 
 a:hover {

@@ -129,8 +129,61 @@ $(document).ready(function () {
 		var reverse = nominal.toString().split("").reverse().join(""),
 			ribuan = reverse.match(/\d{1,3}/g);
 		ribuan = ribuan.join(".").split("").reverse().join("");
+		if(nominal<0){
+			ribuan = "-"+ribuan;
+		}
 
 		// Cetak hasil
 		return ribuan;
 	}
+
+	$(".labaRugiFilter").change(function(){
+		var thisVal = $(this).val();
+		var other = $(this).data('other')
+		var otherVal = $(other).val()
+
+		if(thisVal!='' && otherVal!=''){
+			var dataPost;
+			if(other=='#tahun'){
+				dataPost = {bulan : thisVal, tahun : otherVal}
+			}
+			else{
+				dataPost = {tahun : thisVal, bulan : otherVal}
+			}
+			$.ajax({
+				type : 'post',
+				data : dataPost,
+				url : 'getLabarugi',
+				success : function(data){
+					$("#penjualan").html(rupiah(parseInt(data.penjualan)))
+					$("#potonganPenjualan").html(rupiah(parseInt(data.potongan_penjualan)))
+					$("#return").html(rupiah(parseInt(data.return_penjualan)))
+					$("#totalPenjualan").html(rupiah(parseInt(data.total_penjualan)))
+					$("#pembelian").html(rupiah(parseInt(data.pembelian)))
+					$("#potongan").html(rupiah(parseInt(data.potongan_penjualan)))
+					$("#returnPembelian").html(rupiah(parseInt(data.return_pembelian)))
+					$("#pembelianBersih").html(rupiah(parseInt(data.pembelian_bersih)))
+					$("#persediaanAwal").html(rupiah(parseInt(data.persediaan_awal)))
+					$("#total").html(rupiah(parseInt(data.total_persediaan)))
+					$("#persediaanAkhir").html(rupiah(parseInt(data.persediaan_akhir)))
+					$("#hpp").html(rupiah(parseInt(data.hpp)))
+					$("#labaRugi").html(rupiah(parseInt(data.laba_rugi)))
+				}
+			})
+		}
+	})
+	$(".getKembalian").keyup(function(){
+		var thisVal = parseInt($(this).val())
+		var htmlTotal = $("#total").html()
+		if(htmlTotal!='0'){
+			var total = 0;
+			$(".subtotal").each(function () {
+				total = total + parseInt($(this).val());
+			});
+
+			var kembalian =  thisVal - parseInt(total)
+			$("#kembalian").html(rupiah(kembalian)); 
+		}
+	})
+
 });

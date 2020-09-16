@@ -22,33 +22,6 @@
                         <input type="text" name="nama_pembeli" class="form-control">
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <label for="">Total Bayar</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1"><span class="fas fa-address-book"></span> </span>
-                        </div>
-                        <input type="number" name="total_bayar" class="form-control">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <label for="">Total Potongan</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1"><span class="fas fa-address-book"></span> </span>
-                        </div>
-                        <input type="number" name="potongan" class="form-control">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <label for="">Keterangan</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1"><span class="fas fa-address-book"></span> </span>
-                        </div>
-                        <input type="text" name="keterangan2" class="form-control">
-                    </div>
-                </div>
             </div>
             <hr>
             <div class="loop-detail" data-counting='1'>
@@ -61,16 +34,49 @@
                     <a href="<?= base_url() . "transaksi/addDetailPenjualan" ?>" class="btn btn-default addDetail"><span class="fa fa-plus"></span> Tambah Item</a>
                 </div>
                 <div class="col-auto ml-auto">
-                    <h4 class="total">Total : <span id='total'>0</span> </h4>
+                </div>
+                <div class="col-auto ml-auto">
+                    <h4 class="total">Total : <span id='total'>0</span> &nbsp; <span class='color-blue'> Kembalian : </  span><span id='kembalian'>0</span> </h4>
                 </div>
             </div>
             <hr>
+            <div class="row">
+            <div class="col-md-4">
+                    <label for="">Keterangan</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><span class="fas fa-address-book"></span> </span>
+                        </div>
+                        <input type="text" name="keterangan2" class="form-control">
+                    </div>
+                </div>
+
+            <div class="col-md-4">
+                    <label for="">Total Bayar</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><span class="fas fa-address-book"></span> </span>
+                        </div>
+                        <input type="number" name="total_bayar" class="form-control getKembalian">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="">Total Potongan</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><span class="fas fa-address-book"></span> </span>
+                        </div>
+                        <input type="number" name="potongan" class="form-control changePotongan">
+                    </div>
+                </div>
+            
+            </div>
+
             <div class="mt-3">
                 <?php
                 $this->load->view('common/btn');
                 ?>
             </div>
-
         </form>
     </div>
 </div>

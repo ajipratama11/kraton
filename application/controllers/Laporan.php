@@ -80,8 +80,9 @@ class Laporan extends CI_Controller
         // POST data
         $postData = $this->input->post();
         // Get data
-        $data = $this->M_laporan->getLabarugi($postData);
+        $data = $this->M_laporan->getLabarugi($postData)[0];
 
+        header('content-type:json/application');
         echo json_encode($data);
     }
 

@@ -3,7 +3,7 @@
         
         <form action="<?php echo base_url(); ?>Laporan/exportbukubesar" method="POST" class="row">
             <div class="col-md-2">
-                <select class="form-control" name="bulan" id="bulan" required>
+                <select class="form-control labaRugiFilter" id='bulan' data-other='#tahun' name="bulan" required>
                     <option value="01">Januari</option>
                     <option value="02">Februari</option>
                     <option value="03">Maret</option>
@@ -19,10 +19,13 @@
                 </select>
             </div>
             <div class="col-md-2">
-                <select class="form-control" name="tahun" id="tahun" required>
-                    <option value="2020">2020</option>
-                    <option value="2021">2021</option>
-                    <option value="2022">2021</option>
+                <select class="form-control labaRugiFilter" data-other='#bulan' name="tahun" id="tahun" required>
+                    <?php 
+                        $yearNow = (int)date('Y');
+                        for($i=$yearNow;$i>=$yearNow-10;$i--){
+                            echo "<option>$i</option>";
+                        }
+                    ?>
                 </select>
             </div>
             <input style="margin-right: 10px;" name="submit" type="submit" value="Export" class="btn btn-info" />
@@ -31,24 +34,72 @@
         </form>
         <br>
         <div class="table-responsive">
-            <table id="userTable" class="table table-striped table-hover table-bordered datatable table-custom">
-                <thead>
+            <table class="table table-striped table-custom">
                     <tr>
                         <td>Penjualan</td>
-                        <td>Potongan</td>
-                        <td>Return</td>
-                        <td>Total Penjualan</td>
-                        <td>Pembelian</td>
-                        <td>Potongan</td>
-                        <td>Return</td>
-                        <td>Pembelian bersih</td>
-                        <td>Persediaan awal</td>
-                        <td>Total</td>
-                        <td>Persediaan Akhir</td>
-                        <td>HPP</td>
-                        <td>Laba Rugi</td>
+                        <td>:</td>
+                        <td id='penjualan'></td>
                     </tr>
-                </thead>
+                    <tr>
+                        <td>Potongan</td>
+                        <td>:</td>
+                        <td id='potonganPenjualan'></td>
+                    </tr>
+                    <tr>
+                        <td>Return</td>
+                        <td>:</td>
+                        <td id='return'></td>
+                    </tr>
+                    <tr>
+                        <td>Total Penjualan</td>
+                        <td>:</td>
+                        <td id='totalPenjualan'></td>
+                    </tr>
+                    <tr>
+                        <td>Pembelian</td>
+                        <td>:</td>
+                        <td id='pembelian'></td>
+                    </tr>
+                    <tr>
+                        <td>Potongan</td>
+                        <td>:</td>
+                        <td id='potongan'></td>
+                    </tr>
+                    <tr>
+                        <td>Return</td>
+                        <td>:</td>
+                        <td id='returnPembelian'></td>
+                    </tr>
+                    <tr>
+                        <td>Pembelian bersih</td>
+                        <td>:</td>
+                        <td id='pembelianBersih'></td>
+                    </tr>
+                    <tr>
+                        <td>Persediaan awal</td>
+                        <td>:</td>
+                        <td id='persediaanAwal'></td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td>:</td>
+                        <td id='total'></td>
+                    </tr>
+                    <tr>
+                        <td>Persediaan Akhir</td>
+                        <td>:</td>
+                        <td id='persediaanAkhir'></td>
+                    </tr>
+                    <tr>
+                        <td>HPP</td>
+                        <td>:</td>
+                        <td id='hpp'></td>
+                    </tr>
+                    <tr>
+                        <td>Laba Rugi</td>
+                        <td>:</td>
+                        <td id='labaRugi'></td>
+                    </tr>
 
             </table>
         </div>
@@ -56,7 +107,7 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function() {
-        var userDataTable = $('#userTable').DataTable({
+/*         var userDataTable = $('#userTable').DataTable({
             //   'processing': true,
             'serverSide': true,
             'serverMethod': 'post',
@@ -120,5 +171,7 @@
         $('#searchName').keyup(function() {
             userDataTable.draw();
         });
-    });
+ */    
+
+ });
 </script>

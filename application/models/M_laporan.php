@@ -347,14 +347,14 @@ class M_laporan extends CI_Model
         $response = array();
 
         ## Read value
-        $draw = $postData['draw'];
+/*         $draw = $postData['draw'];
         $start = $postData['start'];
         $rowperpage = $postData['length']; // Rows display per page
         $columnIndex = $postData['order'][0]['column']; // Column index
         $columnName = $postData['columns'][$columnIndex]['data']; // Column name
         $columnSortOrder = $postData['order'][0]['dir']; // asc or desc
         $searchValue = $postData['search']['value']; // Search value
-
+ */
         // Custom search filter 
         // $searchSuplier = $postData['searchSuplier'];
         // $searchNama = $postData['searchNama'];
@@ -383,7 +383,7 @@ class M_laporan extends CI_Model
         //     $searchQuery = implode(" and ", $search_arr);
         // }
 
-        ## Total number of records without filtering
+/*         ## Total number of records without filtering
         $this->db->select('count(*) as allcount');
         $records  = $this->db->get('buku_besar')->result();
         $totalRecords = $records[0]->allcount;
@@ -395,14 +395,14 @@ class M_laporan extends CI_Model
         $this->db->where('MONTH(tanggal)', $bulan);
         $records  = $this->db->get('buku_besar')->result();
         $totalRecordwithFilter = $records[0]->allcount;
-
+ */
         ## Fetch records
         $this->db->select('*');
         if ($bulan != '' || $tahun != '')
             $this->db->where('YEAR(tanggal)', $tahun);
         $this->db->where('MONTH(tanggal)', $bulan);
         $this->db->order_by('buku_besar.id_bukubesar');
-        $this->db->limit($rowperpage, $start);
+//        $this->db->limit($rowperpage, $start);
         $records  = $this->db->get('buku_besar')->result();
 
         // $this->db->select('*');
@@ -471,14 +471,14 @@ class M_laporan extends CI_Model
 
 
         ## Response
-        $response = array(
+/*         $response = array(
             "draw" => intval($draw),
             "iTotalRecords" => $totalRecords,
             "iTotalDisplayRecords" => $totalRecordwithFilter,
             "aaData" => $data
         );
-
-        return $response;
+ */
+        return $data;
     }
    
     function getLaba($postData = null)
