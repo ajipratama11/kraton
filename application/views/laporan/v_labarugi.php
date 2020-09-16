@@ -22,7 +22,7 @@
                 <select class="form-control" name="tahun" id="tahun" required>
                     <option value="2020">2020</option>
                     <option value="2021">2021</option>
-                    <option value="2022">2021</option>
+                    <option value="2022">2022</option>
                 </select>
             </div>
             <input style="margin-right: 10px;" name="submit" type="submit" value="Export" class="btn btn-info" />

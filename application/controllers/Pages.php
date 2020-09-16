@@ -9,6 +9,7 @@ class Pages extends CI_Controller
 		$this->icon = "fa-desktop";
 		$this->load->model('M_barang');
 		$this->load->model('M_kategori');
+		$this->load->model('M_akun');
 		if ($this->session->userdata('status') != "login") {
             echo "<script>
                 alert('Anda harus login terlebih dahulu');
@@ -33,6 +34,10 @@ class Pages extends CI_Controller
 	public function edit_kategori()
 	{
 		$this->load->view("pages/v_modal_edit_kategori");
+	}
+	public function edit_akun()
+	{
+		$this->load->view("pages/v_modal_edit_akun");
 	}
 	public function edit_barang()
 	{
@@ -61,6 +66,13 @@ class Pages extends CI_Controller
 		$this->session->set_flashdata('success2', '<div class="alert alert-warning" role="alert">Barang Berhasil Diedit :)</div>');
 		redirect('Pages/table_barang');
 	}
+	public function aksiedit_akun()
+	{
+		$id_admin = $this->input->post('id_admin');
+		$this->M_akun->updateAkun($id_admin);
+		$this->session->set_flashdata('editakun', '<div class="alert alert-warning" role="alert">Akun Berhasil Diedit :)</div>');
+		redirect('Pages/table_akun');
+	}
 
 
 	public function delete_barang(){
@@ -68,6 +80,12 @@ class Pages extends CI_Controller
 		$this->M_barang->deleteBarang($kode_barang);
 		$this->session->set_flashdata('success3', '<div class="alert alert-danger" role="alert">Barang Berhasil Di hapus :)</div>');
 		redirect('Pages/table_barang');
+	}
+	public function delete_akun(){
+		$id_akun = $this->uri->segment(3);
+		$this->M_akun->deleteAkun($id_akun);
+		$this->session->set_flashdata('deleteakun', '<div class="alert alert-danger" role="alert">Akun Berhasil Di hapus :)</div>');
+		redirect('Pages/table_akun');
 	}
 	public function delete_kategori(){
 		$id_kategori = $this->uri->segment(3);
@@ -80,6 +98,12 @@ class Pages extends CI_Controller
 		$param['pageInfo'] = "Example Table";
 		$param['barang'] = $this->M_barang->get_barang();
 		$this->template->load("pages/v_barang", $param);
+	}
+	public function table_akun()
+	{
+		$param['pageInfo'] = "Tabel Akun";
+		$param['akun'] = $this->M_akun->get_akun();
+		$this->template->load("pages/v_akun", $param);
 	}
 	public function table_kategori()
 	{
@@ -98,6 +122,20 @@ class Pages extends CI_Controller
 		$this->M_barang->addBarang($kode_barang);
 		$this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Barang Berhasil Disimpan :)</div>');
 		redirect('Pages/table_barang');
+	}
+	public function tambah_akun()
+	{
+		$username = $this->input->post('username');
+		$sql = $this->db->query("SELECT * FROM `admin` WHERE username='$username'")->num_rows();
+
+		if($sql != 0){
+			$this->session->set_flashdata('usernamesudahada', '<div class="alert alert-danger" role="alert">Username sudah digunakan :)</div>');
+		redirect('Pages/table_akun');
+		}else{
+			$this->M_akun->addAkun();
+			$this->session->set_flashdata('usernamebelumada', '<div class="alert alert-success" role="alert">Berhasil Tambah Akun :)</div>');
+			redirect('Pages/table_akun');
+		}
 	}
 	public function tambah_kategori()
 	{

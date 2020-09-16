@@ -77,6 +77,7 @@
             <div class="py-2 collapse-inner rounded">
               <a class="collapse-item" href="<?= base_url('Pages/table_barang'); ?>">Barang</a>
               <a class="collapse-item" href="<?= base_url('Pages/table_kategori'); ?>">Kategori</a>
+              <a class="collapse-item" href="<?= base_url('Pages/table_akun'); ?>">Akun</a>
             </div>
           </div>
         </li>
