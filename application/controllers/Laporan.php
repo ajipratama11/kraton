@@ -361,4 +361,133 @@ class Laporan extends CI_Controller
             
         }
     }
+    public function exportlabarugi()
+    {
+        $bulan = $this->input->post('bulan');
+        $tahun = $this->input->post('tahun');
+        $tanggal = $tahun . '-' . $bulan . '-01';
+        $records = $this->db->query("SELECT * FROM buku_besar WHERE YEAR(tanggal)='$tahun' AND MONTH(tanggal)='$bulan' ORDER BY id_bukubesar")->result();
+
+        $this->db->select('SUM(buku_besar.nominal) as total');
+        $this->db->where('jenis', 'kredit');
+        $this->db->where('tanggal <', $tanggal);
+        $totalKredit  = $this->db->get('buku_besar')->result();
+
+        $this->db->select('SUM(buku_besar.nominal) as total');
+
+        $this->db->where('jenis', 'debit');
+        $this->db->where('tanggal <', $tanggal);
+        $totalDebit  = $this->db->get('buku_besar')->result();
+
+        $this->db->select('SUM(penjualan.total_penjualan) as total');
+        // $this->db->limit($rowperpage, $start);
+        $this->db->where('YEAR(tanggal_penjualan)', $tahun);
+        $this->db->where('MONTH(tanggal_penjualan)', $bulan);
+        $penjualan  = $this->db->get('penjualan')->result();
+
+
+        $this->db->select('SUM(pembelian.total) as total');
+        // $this->db->limit($rowperpage, $start);
+        $this->db->where('YEAR(tanggal_pembelian)', $tahun);
+        $this->db->where('MONTH(tanggal_pembelian)', $bulan);
+        $pembelian  = $this->db->get('pembelian')->result();
+
+        $this->db->select('SUM(penjualan.potongan) as total');
+        // $this->db->limit($rowperpage, $start);
+        $this->db->where('YEAR(tanggal_penjualan)', $tahun);
+        $this->db->where('MONTH(tanggal_penjualan)', $bulan);
+        $potongan  = $this->db->get('penjualan')->result();
+
+
+        $saldoAwal = $totalDebit[0]->total - $totalKredit[0]->total;
+            $totalpenjualan = $penjualan[0]->total-$potongan[0]->total;
+            $returnpenjualan = 0;
+            $returnpembelian = 0;
+            $potonganpembelian = 0;
+            $pembelianbersih = $pembelian[0]->total-$returnpembelian-$potonganpembelian;
+            $totalpersediaan = $totalDebit[0]->total+$pembelian[0]->total;
+            $persediaanakhir = $totalDebit[0]->total-$totalpenjualan;
+            $hpp = $totalpersediaan-$persediaanakhir;
+        if ($this->input->post('submit')) {
+
+
+            // require(APPPATH. 'libraries/PHPExcel.php');
+            require(APPPATH . 'libraries/PHPExcel/Writer/Excel2007.php');
+
+            $object = new PHPExcel();
+
+            $object->getProperties()->setCreator("Kelompok 70 PKL TKWU");
+            $object->getProperties()->setLastModifiedBy("AJI PRATAMA");
+            $object->getProperties()->setTitle("Laporan Laba Rugi");
+
+            $object->setActiveSheetIndex(0);
+
+            $object->getActiveSheet()->setCellValue('A1', 'Laba Rugi Tahun ' . $tahun . ' Bulan ' . $bulan);
+            $object->getActiveSheet()->setCellValue('A2', 'Penjualan');
+            $object->getActiveSheet()->setCellValue('A3', 'Potongan');
+            $object->getActiveSheet()->setCellValue('A4', 'Return Penjualan');
+            $object->getActiveSheet()->setCellValue('A5', 'Total Penjualan');
+            $object->getActiveSheet()->setCellValue('A7', 'Pembelian');
+            $object->getActiveSheet()->setCellValue('A8', 'Potongan');
+            $object->getActiveSheet()->setCellValue('A9', 'Return Pembelian');
+            $object->getActiveSheet()->setCellValue('A11', 'Pembelian Bersih');
+            $object->getActiveSheet()->setCellValue('A12', 'Persediaan Awal');
+            $object->getActiveSheet()->setCellValue('A14', 'Persediaan Akhir');
+            $object->getActiveSheet()->setCellValue('A15', 'HPP');
+            $object->getActiveSheet()->setCellValue('A16', 'Laba/Rugi');
+
+            $baris = 4;
+            $no = 1;
+            
+            
+            $object->getActiveSheet()->setCellValue('B2', $penjualan[0]->total);
+            $object->getActiveSheet()->setCellValue('B3',  $potongan[0]->total);
+            $object->getActiveSheet()->setCellValue('B4',  $returnpenjualan);
+            $object->getActiveSheet()->setCellValue('B5', $totalpenjualan);
+            $object->getActiveSheet()->setCellValue('B7', $pembelian[0]->total);
+            $object->getActiveSheet()->setCellValue('B8', $potonganpembelian);
+            $object->getActiveSheet()->setCellValue('B9', $returnpembelian);
+            $object->getActiveSheet()->setCellValue('B11', $pembelianbersih);
+            $object->getActiveSheet()->setCellValue('B12', $totalDebit[0]->total);
+            $object->getActiveSheet()->setCellValue('B13', $totalpersediaan);
+            $object->getActiveSheet()->setCellValue('B14', $persediaanakhir);
+            $object->getActiveSheet()->setCellValue('B15', $hpp);
+            $object->getActiveSheet()->setCellValue('B16', $totalpenjualan-$hpp);
+
+          
+        
+
+
+            $filename = "Laporan Laba Rugi ".$tahun."-".$bulan . '.xlsx';
+            $object->getActiveSheet()->setTitle("Laporan Penjualan");
+
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment;filename="' . $filename . '"');
+            header('Cache-Control: max-age=0');
+
+            $writer = PHPExcel_IOFactory::createWriter($object, 'Excel2007');
+            $writer->save('php://output');
+
+            exit;
+        } else if ($this->input->post('submit2')) {
+
+                $param['pageInfo'] = "List Buku Besar";
+                $param['tanggal'] = "Tahun ".$tahun." Bulan ".$bulan;
+                $param['penjualan'] = $penjualan[0]->total;
+                $param['potongan'] = $potongan[0]->total;
+                $param['return_penjualan'] = $returnpenjualan;
+                $param['total_penjualan'] = $totalpenjualan;
+                $param['pembelian'] = $pembelian[0]->total;
+                $param['potongan2'] = $potonganpembelian;
+                $param['return_pembelian'] = $returnpembelian;
+                $param['pembelian_bersih'] = $pembelianbersih;
+                $param['persediaan_awal'] = $totalDebit[0]->total;
+                $param['total_persediaan'] = $totalpersediaan;
+                $param['persediaan_akhir'] = $persediaanakhir;
+                $param['hpp'] = $hpp;
+                $param['laba_rugi'] =  $totalpenjualan-$hpp;
+                $this->load->view("print/labarugi", $param);
+            
+        }
+    }
 }
