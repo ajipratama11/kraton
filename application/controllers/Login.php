@@ -148,10 +148,11 @@ class Login extends CI_Controller{
 				);
                 
 			$this->session->set_userdata($data_session);
-			redirect('Pages/table_barang');
+			redirect('Transaksi/penjualan');
  
 		}else{
-			$this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Berhasil Login :)</div>');
+            $this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Berhasil Login :)</div>');
+            redirect('Login');
 		}
 	}
 
