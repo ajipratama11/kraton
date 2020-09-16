@@ -1,7 +1,7 @@
 <div class="card shadow py-2">
     <div class="card-body">
         
-        <form action="<?php echo base_url(); ?>Laporan/exportbukubesar" method="POST" class="row">
+        <form action="<?php echo base_url(); ?>Laporan/exportlabarugi" method="POST" class="row">
             <div class="col-md-2">
                 <select class="form-control" name="bulan" id="bulan" required>
                     <option value="01">Januari</option>

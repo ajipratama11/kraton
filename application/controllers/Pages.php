@@ -92,7 +92,6 @@ class Pages extends CI_Controller
 		$this->load->view("auth/login");
 	}
 
-
 	public function tambah_barang()
 	{
 		$kode_barang = $this->M_barang->get_idbarang();
