@@ -396,6 +396,17 @@ class Laporan extends CI_Controller
         $this->db->where('YEAR(tanggal_penjualan)', $tahun);
         $this->db->where('MONTH(tanggal_penjualan)', $bulan);
         $potongan  = $this->db->get('penjualan')->result();
+
+
+        $saldoAwal = $totalDebit[0]->total - $totalKredit[0]->total;
+            $totalpenjualan = $penjualan[0]->total-$potongan[0]->total;
+            $returnpenjualan = 0;
+            $returnpembelian = 0;
+            $potonganpembelian = 0;
+            $pembelianbersih = $pembelian[0]->total-$returnpembelian-$potonganpembelian;
+            $totalpersediaan = $totalDebit[0]->total+$pembelian[0]->total;
+            $persediaanakhir = $totalDebit[0]->total-$totalpenjualan;
+            $hpp = $totalpersediaan-$persediaanakhir;
         if ($this->input->post('submit')) {
 
 
@@ -426,15 +437,7 @@ class Laporan extends CI_Controller
 
             $baris = 4;
             $no = 1;
-            $saldoAwal = $totalDebit[0]->total - $totalKredit[0]->total;
-            $totalpenjualan = $penjualan[0]->total-$potongan[0]->total;
-            $returnpenjualan = 0;
-            $returnpembelian = 0;
-            $potonganpembelian = 0;
-            $pembelianbersih = $pembelian[0]->total-$returnpembelian-$potonganpembelian;
-            $totalpersediaan = $totalDebit[0]->total+$pembelian[0]->total;
-            $persediaanakhir = $totalDebit[0]->total-$totalpenjualan;
-            $hpp = $totalpersediaan-$persediaanakhir;
+            
             
             $object->getActiveSheet()->setCellValue('B2', $penjualan[0]->total);
             $object->getActiveSheet()->setCellValue('B3',  $potongan[0]->total);
@@ -468,11 +471,21 @@ class Laporan extends CI_Controller
         } else if ($this->input->post('submit2')) {
 
                 $param['pageInfo'] = "List Buku Besar";
-                $param['totalDebit'] = $totalDebit;
-                $param['totalKredit'] = $totalKredit;
-                $param['tanggal'] = $tanggal;
-                $param['records'] =  $this->db->query("SELECT * FROM buku_besar WHERE YEAR(tanggal)='$tahun' AND MONTH(tanggal)='$bulan' ORDER BY id_bukubesar")->result();
-                $this->load->view("print/bukubesar", $param);
+                $param['tanggal'] = "Tahun ".$tahun." Bulan ".$bulan;
+                $param['penjualan'] = $penjualan[0]->total;
+                $param['potongan'] = $potongan[0]->total;
+                $param['return_penjualan'] = $returnpenjualan;
+                $param['total_penjualan'] = $totalpenjualan;
+                $param['pembelian'] = $pembelian[0]->total;
+                $param['potongan2'] = $potonganpembelian;
+                $param['return_pembelian'] = $returnpembelian;
+                $param['pembelian_bersih'] = $pembelianbersih;
+                $param['persediaan_awal'] = $totalDebit[0]->total;
+                $param['total_persediaan'] = $totalpersediaan;
+                $param['persediaan_akhir'] = $persediaanakhir;
+                $param['hpp'] = $hpp;
+                $param['laba_rugi'] =  $totalpenjualan-$hpp;
+                $this->load->view("print/labarugi", $param);
             
         }
     }
