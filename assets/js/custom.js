@@ -89,7 +89,7 @@ $(document).ready(function () {
 					counting--;
 					$(".loop-detail").attr("data-counting", counting);
 					$(".detail-field[data-id='" + target + "']").remove();
-					getTotal();
+					$("#total").html(rupiah(getTotal()));
 				});
 				$(".select2").select2();
 				$(".qtyHarga").keyup(function () {
@@ -112,15 +112,40 @@ $(document).ready(function () {
 		var subtotalVal = thisVal * parentVal;
 		subtotalVal = isNaN(subtotalVal) ? thisVal : subtotalVal;
 		$(subtotal).val(subtotalVal);
-		getTotal();
+		$("#total").html(rupiah(getTotal()));
+	}
+	function getKembalian(){
+		var totalBayar = parseInt($("#inputBayar").val())
+		var potongan = parseInt($("#inputPotongan").val())
+		var htmlTotal = $("#total").html()
+		if(htmlTotal!='0'){
+			var	kembalian = totalBayar - getPotongan();
+			return parseInt(kembalian)
+		}
 	}
 	function getTotal() {
 		var total = 0;
 		$(".subtotal").each(function () {
 			total = total + parseInt($(this).val());
 		});
-		$("#total").html(rupiah(total));
+		return parseInt(total);
 	}
+	function getPotongan(){
+		var thisVal = parseInt($("#inputPotongan").val())
+		var htmlTotal = $("#total").html()
+		if(htmlTotal!='0'){
+			var total =  getTotal() - thisVal
+
+			return parseInt(total);
+		}
+ 	}
+	$(".totalKembalian").keyup(function(){
+		if($(this).val()!=''){
+			$("#total").html(rupiah(getPotongan()));
+			$("#kembalian").html(rupiah(getKembalian()));
+		}
+	})
+	
 	$(".qtyHarga").keyup(function () {
 		qtyHarga($(this));
 	});
@@ -170,19 +195,6 @@ $(document).ready(function () {
 					$("#labaRugi").html(rupiah(parseInt(data.laba_rugi)))
 				}
 			})
-		}
-	})
-	$(".getKembalian").keyup(function(){
-		var thisVal = parseInt($(this).val())
-		var htmlTotal = $("#total").html()
-		if(htmlTotal!='0'){
-			var total = 0;
-			$(".subtotal").each(function () {
-				total = total + parseInt($(this).val());
-			});
-
-			var kembalian =  thisVal - parseInt(total)
-			$("#kembalian").html(rupiah(kembalian)); 
 		}
 	})
 
