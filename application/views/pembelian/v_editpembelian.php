@@ -3,6 +3,7 @@
         <a href="<?php echo base_url() . "transaksi/listpembelian" ?>" class="btn btn-success mb-3"> <span class="fa fa-arrow-alt-circle-left"></span> List Pembelian</a>
         <hr>
         <form action="<?= base_url('Transaksi/aksieditpembelian') ?>" method="POST">
+      
             <?php foreach ($beli as $g) { ?>
                 <div class="row">
                     <div class="col-md-4">
@@ -29,6 +30,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1"><span class="fas fa-address-book"></span> </span>
                             </div>
+                            <input type="text" value="<?= $g->id_admin ?>" name="id_admin" class="form-control">
                             <input type="text" value="<?= $g->keterangan ?>" name="keterangan2" class="form-control">
                         </div>
                     </div>
