@@ -2,8 +2,11 @@
     <div class="card-body">
         <a href="<?php echo base_url() . "transaksi/listpembelian" ?>" class="btn btn-success mb-3"> <span class="fa fa-arrow-alt-circle-left"></span> List Pembelian</a>
         <hr>
+        <?php 
+            $this->load->view('pages/alert');
+        ?>
         <form action="<?= base_url('Transaksi/aksieditpembelian') ?>" method="POST">
-      
+            <div class="deletedId"></div>
             <?php foreach ($beli as $g) { ?>
                 <div class="row">
                     <div class="col-md-4">
@@ -42,7 +45,7 @@
                 <?php
                 foreach ($detail as $key  => $data) {
                     $key++;
-                    $start = $key == 1 ? true : false;
+                    $start = $key == 1 ? 1 : 0;
                     $this->load->view('pembelian/loop-detail', ['start' => $start, 'now' => $key, 'edit' => $data]);
                 }
 

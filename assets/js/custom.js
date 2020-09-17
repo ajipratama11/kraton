@@ -206,5 +206,10 @@ $(document).ready(function () {
 			})
 		}
 	})
+	$(".editRemoveField").click(function(e){
+		e.preventDefault()
+		var id = $(this).data('id')
 
+		$(".deletedId").append(`<input type='hidden' name='id_delete[]' value='${id}'>`)
+	})
 });

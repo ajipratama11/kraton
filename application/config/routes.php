@@ -53,4 +53,5 @@ $route['default_controller'] = 'Dashboard';
 $route['404_override'] = 'Errorban';
 $route['translate_uri_dashes'] = FALSE;
 $route['pembelian'] = 'transaksi/pembelian';
+$route['pembelian/edit/(:any)'] = 'transaksi/editpembelian/$1';
 $route['list_pembelian'] = 'transaksi/listpembelian';

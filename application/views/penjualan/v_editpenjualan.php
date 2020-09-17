@@ -40,10 +40,10 @@
             <?php
             foreach ($detail as $key  => $data) {
                 $key++;
-                $start = $key == 1 ? true : false;
+                $start = $key == 1 ? 1 : 0;
+
                 $this->load->view('pembelian/loop-detail', ['start' => $start, 'now' => $key, 'edit' => $data]);
             }
-
             ?>
         </div>
         <div class="row">
