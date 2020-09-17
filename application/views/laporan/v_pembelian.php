@@ -1,5 +1,6 @@
 <div class="card shadow py-2">
     <div class="card-body">
+        
         <form action="<?php echo base_url(); ?>Laporan/export" method="POST" class="row">
         <div class="col-md-2">
             <input type="text" id="tglawal" name="tanggal_awal"  class="form-control datepicker">

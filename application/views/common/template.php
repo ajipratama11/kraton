@@ -94,11 +94,13 @@
             </div>
           </div>
         </li>
+        <?php if($this->session->userdata('level') == 'admin') { ?>
         <li class="nav-item">
           <a class="nav-link" href="<?= base_url('Pages/table_akun'); ?>">
             <i class="fas fa-fw fa-users"></i>
             <span>Akun</span></a>
         </li>
+        <?php } ?>
 
 
         <!-- Sidebar Toggler (Sidebar) -->

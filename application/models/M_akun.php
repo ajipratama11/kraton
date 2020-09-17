@@ -68,6 +68,7 @@ class M_akun   extends CI_Model
         $this->username = $post['username'];
         $this->password = $post['password'];
         $this->no_tlp = $post['no_tlp'];
+        $this->level = 'karyawan';
         $this->db->insert($this->_table, $this);
     }
 
@@ -78,6 +79,7 @@ class M_akun   extends CI_Model
         $this->username = $post['username'];
         $this->password = $post['password'];
         $this->no_tlp = $post['no_tlp'];
+        $this->level = $post['level'];
         $this->db->update($this->_table, $this, array("id_admin" => $id_admin));
     }
 

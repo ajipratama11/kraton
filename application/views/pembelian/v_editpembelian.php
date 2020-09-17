@@ -33,6 +33,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1"><span class="fas fa-address-book"></span> </span>
                             </div>
+                            <input type="text" value="<?= $g->id_admin ?>" name="id_admin" class="form-control">
                             <input type="text" value="<?= $g->keterangan ?>" name="keterangan2" class="form-control">
                         </div>
                     </div>

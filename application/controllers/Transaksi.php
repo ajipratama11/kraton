@@ -200,6 +200,8 @@ class Transaksi extends CI_Controller
 		foreach ($_POST['qty'] as $value) {
 			$total_qty += $value;
 		}
+
+		
 		$total_bayar = $this->input->post('total_bayar');
 		$nama_pembeli = $this->input->post('nama_pembeli');
 		$potongan = $this->input->post('potongan');
@@ -214,9 +216,19 @@ class Transaksi extends CI_Controller
 			'id_admin' => $_POST['id_admin'],
 			'keterangan' => $_POST['keterangan2'],
 		);
+		$bukubesar = array(
+			'kode_transaksi' => $kode_penjualan,
+			'tipe' => 'pembelian',
+			'nominal' => $_POST['total_penjualan'],
+			'jenis	' => 'kredit',
+		);
 		$this->db->set($penjualan);
-			$this->db->where('kode_penjualan', $kode_penjualan);
-			$this->db->update('penjualan');
+		$this->db->where('kode_penjualan', $kode_penjualan);
+		$this->db->update('penjualan');
+
+		$this->db->set($bukubesar);
+		$this->db->where('kode_transaksi', $kode_penjualan);
+		$this->db->update('buku_besar');	
 		$lasId = $this->M_penjualan->getLastId();
 		foreach ($_POST['kode_barang'] as $key => $value) {
 			$data = [
@@ -240,6 +252,24 @@ class Transaksi extends CI_Controller
 		$this->session->set_flashdata('updatepenjualan', '<div class="alert alert-success" role="alert">Penjualan Berhasil Di Edit</div>');
 		redirect('transaksi/penjualan');
 	}
+
+	public function deletepembelian(){
+		$id = $this->uri->segment(3);
+		$this->db->delete('pembelian', array('kode_pembelian' => $id)); 
+		$this->db->delete('detail_pembelian', array('kode_pembelian' => $id)); 
+		$this->db->delete('buku_besar', array('kode_transaksi' => $id)); 
+		$this->session->set_flashdata('deletepembelian', '<div class="alert alert-success" role="alert">Pembelian Berhasil Di Hapus</div>');
+		redirect('transaksi/pembelian');		
+	}
+	public function deletepenjualan(){
+		$id = $this->uri->segment(3);
+		$this->db->delete('penjualan', array('kode_penjualan' => $id)); 
+		$this->db->delete('detail_penjualan', array('kode_penjualan' => $id)); 
+		$this->db->delete('buku_besar', array('kode_transaksi' => $id)); 
+		$this->session->set_flashdata('deletepenjualan', '<div class="alert alert-success" role="alert">Penjualan Berhasil Di Hapus</div>');
+		redirect('transaksi/penjualan');
+	}
+
 	public function aksipembelian()
 	{
 		$total = 0;
