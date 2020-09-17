@@ -26,7 +26,7 @@
             <hr>
             <div class="loop-detail" data-counting='1'>
                 <?php
-                $this->load->view('penjualan/loop-detail', ['start' => true, 'now' => 1])
+                $this->load->view('penjualan/loop-detail', ['start' => 1, 'now' => 1])
                 ?>
             </div>
             <div class="row">
