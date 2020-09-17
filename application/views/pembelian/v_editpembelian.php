@@ -24,16 +24,6 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label for="">Total</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><span class="fa fa-calendar"></span> </span>
-                            </div>
-                            <input type="text" name="total" value="<?= $g->total ?>" class="form-control">
-                            <input type="hidden" name="id_admin" value="<?= $g->id_admin ?>" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
                         <label for="">Keterangan</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">

@@ -16,7 +16,7 @@
     <div class="col-md-3">
         <?php
         if (isset($edit)) {
-            echo "<input type='hidden' name='id_detail[]' value='$value[id_detail]'";
+            echo "<input type='hidden' name='id_detail[]' value='$value[id_detail]'>";
         }
         ?>
         <label for="">Kode Barang</label>
@@ -44,12 +44,12 @@
         <label for="">Keterangan</label>
         <input type="text" name='keterangan[]' class="form-control" value='<?= $value['keterangan'] ?>'>
     </div>
-    <div class="col-md-<?= isset($start) ? '4' : '3' ?>">
+    <div class="col-md-<?= $start ? '4' : '3' ?>">
         <label for="">Subtotal</label>
         <input type="text" name='subtotal[]' class="form-control subtotal" id='subtotal<?= $now ?>' value='<?= $value['subtotal'] ?>' readonly>
     </div>
     <?php
-    if (empty($start)) {
+    if (!$start) {
     ?>
         <div class="col-md-1">
             <br>

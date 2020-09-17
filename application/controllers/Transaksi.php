@@ -6,7 +6,7 @@ class Transaksi extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		$this->icon = "fa-desktop";
+		$this->icon = "fa-cubes";
 		$this->load->model('M_pembelian');
 		$this->load->model('M_penjualan');
 		$this->load->model('M_kas');
@@ -118,7 +118,7 @@ class Transaksi extends CI_Controller
 
 	public function listpembelian()
 	{
-		$param['pageInfo'] = "List Pembelian";
+		$param['pageInfo'] = "List Pembelian Barang";
 		$param['pembelian'] = $this->M_pembelian->listpembelian();
 		$this->template->load("pembelian/v_listpembelian", $param);
 	}

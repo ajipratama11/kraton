@@ -28,9 +28,8 @@
                             <td>
                                 <?php
                                 $dropdown['link'] = array(
-                                    "Print" => base_url() ."Transaksi/editpembelian/".$g->kode_pembelian,
-                                    "Export" => base_url() ."Transaksi/editpembelian/".$g->kode_pembelian,
-                                    "Detail" => base_url()
+                                    "Edit" => base_url() ."Transaksi/editpembelian/".$g->kode_pembelian,
+                                    "Delete" => base_url() ."Transaksi/editpembelian/".$g->kode_pembelian,
                                 );
                                 $this->load->view("common/dropdown", $dropdown);
                                 ?>

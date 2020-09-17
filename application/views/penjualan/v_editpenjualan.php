@@ -32,44 +32,6 @@
                             <input type="text" value="<?= $g->nama_pembeli ?>" name="nama_pembeli" class="form-control">
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <label for="">Total Penjualan</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><span class="fas fa-address-book"></span> </span>
-                            </div>
-                            <input type="hidden" value="<?= $g->total_qty ?>" name="total_qty" class="form-control">
-                            <input type="number" value="<?= $g->total_penjualan ?>" name="total_penjualan" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="">Total Bayar</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><span class="fas fa-address-book"></span> </span>
-                            </div>
-                            <input type="number" value="<?= $g->total_bayar ?>" name="total_bayar" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="">Total Potongan</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><span class="fas fa-address-book"></span> </span>
-                            </div>
-                            <input type="number" value="<?= $g->potongan ?>" name="potongan" class="form-control">
-                            <input type="hidden" value="<?= $g->id_admin ?>" name="id_admin" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="">Keterangan</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><span class="fas fa-address-book"></span> </span>
-                            </div>
-                            <input type="text" value="<?= $g->keterangan ?>" name="keterangan2" class="form-control">
-                        </div>
-                    </div>
             </div>
         <?php } ?>
         <hr>
@@ -88,10 +50,46 @@
                 <a href="<?= base_url() . "transaksi/addDetailPenjualan" ?>" class="btn btn-default addDetail"><span class="fa fa-plus"></span> Tambah Item</a>
             </div>
             <div class="col-auto ml-auto">
-                <h4 class="total">Total : <span id='total'>0</span> </h4>
+                <h4 class="total">Total : <span id='total'><?= number_format($g->total_penjualan - $g->potongan,0,',','.') ?></span> </h4>
             </div>
         </div>
         <hr>
+        <div class="row">
+            <div class="col-md-4">
+                    <label for="">Keterangan</label>
+                    <input type="hidden" value="<?= $g->total_qty ?>" name="total_qty" class="form-control">
+                    <input type="hidden" value="<?= $g->id_admin ?>" name="id_admin" class="form-control">
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><span class="fas fa-address-book"></span> </span>
+                        </div>
+                        <input type="text" value="<?= $g->keterangan ?>" name="keterangan2" class="form-control">
+                    </div>
+                </div>
+
+            <div class="col-md-4">
+                    <label for="">Total Bayar</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><span class="fas fa-address-book"></span> </span>
+                        </div>
+                        <input type="number" name="total_bayar" class="form-control totalKembalian" id='inputBayar' value='<?= $g->total_bayar ?>'>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="">Total Potongan</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><span class="fas fa-address-book"></span> </span>
+                        </div>
+
+                        <input type="number" name="potongan" class="form-control totalKembalian" id='inputPotongan'  value="<?= $g->potongan ?>">
+                    </div>
+                </div>
+            
+            </div>
+        
         <div class="mt-3">
             <?php
             $this->load->view('common/btn');

@@ -54,54 +54,50 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-          <a class="nav-link" href="<?php echo base_url() . 'transaksi/pembelian' ?>">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+          <a class="nav-link" href="<?php echo base_url() . 'pembelian' ?>">
+            <i class="fas fa-fw fa-cubes"></i>
             <span>Pembelian Barang</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?php echo base_url() . 'transaksi/penjualan' ?>">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <i class="fas fa-fw fa-shopping-cart"></i>
             <span>Penjualan Barang</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?php echo base_url() . 'transaksi/kas' ?>">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <i class="fas fa-fw fa-wallet"></i>
             <span>Kas</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-desktop"></i>
-            <span>Data</span>
+            <i class="fas fa-fw fa-cube"></i>
+            <span>Data Barang</span>
           </a>
           <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="py-2 collapse-inner rounded">
-              <a class="collapse-item" href="<?= base_url('Pages/table_barang'); ?>">Barang</a>
-              <a class="collapse-item" href="<?= base_url('Pages/table_kategori'); ?>">Kategori</a>
-              <a class="collapse-item" href="<?= base_url('Pages/table_akun'); ?>">Akun</a>
+              <a class="collapse-item" href="<?= base_url('Pages/table_barang'); ?>">Master Barang</a>
+              <a class="collapse-item" href="<?= base_url('Pages/table_kategori'); ?>">Kategori Barang</a>
             </div>
           </div>
         </li>
         <li class="nav-item">
           <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-desktop"></i>
+            <i class="fas fa-fw fa-file-alt"></i>
             <span>Laporan</span>
           </a>
           <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="py-2 collapse-inner rounded">
-              <a class="collapse-item" href="<?= base_url('Laporan/laporanpembelian'); ?>">Pembelian</a>
-              <a class="collapse-item" href="<?= base_url('Laporan/laporanpenjualan'); ?>">Penjualan</a>
+              <a class="collapse-item" href="<?= base_url('Laporan/laporanpembelian'); ?>">Laporan Pembelian</a>
+              <a class="collapse-item" href="<?= base_url('Laporan/laporanpenjualan'); ?>">Laporan Penjualan</a>
+              <a class="collapse-item" href="<?php echo base_url() . 'Laporan/laporanbukubesar' ?>">Buku Besar</a>
+              <a class="collapse-item" href="<?php echo base_url() . 'Laporan/laporanlabarugi' ?>">Laba Rugi</a>
             </div>
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?php echo base_url() . 'Laporan/laporanbukubesar' ?>">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Buku Besar</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<?php echo base_url() . 'Laporan/laporanlabarugi' ?>">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Laba Rugi</span></a>
+          <a class="nav-link" href="<?= base_url('Pages/table_akun'); ?>">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Akun</span></a>
         </li>
 
 
@@ -125,18 +121,6 @@
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
-
-          <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
-              </div>
-            </div>
-          </form>
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
@@ -162,53 +146,6 @@
             </li>
 
             <!-- Nav Item - Alerts -->
-            <li class="nav-item dropdown no-arrow mx-1">
-              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-bell fa-fw"></i>
-                <!-- Counter - Alerts -->
-                <span class="badge badge-danger badge-counter">3+</span>
-              </a>
-              <!-- Dropdown - Alerts -->
-              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-                <h6 class="dropdown-header">
-                  Alerts Center
-                </h6>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
-                    <div class="icon-circle bg-primary">
-                      <i class="fas fa-file-alt text-white"></i>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">December 12, 2019</div>
-                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
-                    <div class="icon-circle bg-success">
-                      <i class="fas fa-donate text-white"></i>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">December 7, 2019</div>
-                    $290.29 has been deposited into your account!
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
-                    <div class="icon-circle bg-warning">
-                      <i class="fas fa-exclamation-triangle text-white"></i>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">December 2, 2019</div>
-                    Spending Alert: We've noticed unusually high spending for your account.
-                  </div>
-                </a>
-                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-              </div>
-            </li>
 
             <!-- Nav Item - Messages -->
 

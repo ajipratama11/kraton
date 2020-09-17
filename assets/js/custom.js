@@ -70,6 +70,19 @@ $(document).ready(function () {
 	$(".setHarga").change(function () {
 		setHarga($(this));
 	});
+	function removeField(thisParam){
+		var target = thisParam.data("target");
+		var counting = parseInt($(".loop-detail").attr("data-counting"));
+		counting--;
+		$(".loop-detail").attr("data-counting", counting);
+		$(".detail-field[data-id='" + target + "']").remove();
+		$("#total").html(rupiah(getTotal()));
+	}
+	$(".removeField").click(function (e) {
+		e.preventDefault();
+		removeField($(this))
+	});
+
 	$(".addDetail").click(function (e) {
 		e.preventDefault();
 		var url = $(this).attr("href");
@@ -85,11 +98,7 @@ $(document).ready(function () {
 				$(".loop-detail").attr("data-counting", counting);
 				$(".removeField").click(function (e) {
 					e.preventDefault();
-					var target = $(this).data("target");
-					counting--;
-					$(".loop-detail").attr("data-counting", counting);
-					$(".detail-field[data-id='" + target + "']").remove();
-					$("#total").html(rupiah(getTotal()));
+					removeField($(this))
 				});
 				$(".select2").select2();
 				$(".qtyHarga").keyup(function () {
