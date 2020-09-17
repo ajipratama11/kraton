@@ -19,6 +19,8 @@
                         <p>E-Kasir Desa Kraton</p>
                     </div>
                     <div class="body">
+                    <?php echo $this->session->flashdata('username'); ?>
+                    <?php echo $this->session->flashdata('password'); ?>
                         <div class="intro mb-4">
                             <p class="mb-0"><span class="fa fa-info-circle mr-2"></span> Login untuk masuk ke aplikasi E-Kasir Desa Kraton</p>
                         </div>

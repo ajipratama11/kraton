@@ -129,31 +129,38 @@ class Login extends CI_Controller{
     function aksi_login(){
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
-		foreach($this->M_login->iduser2($username) as $row){
-			$idadmin=$row->id_admin;
-			$username = $row->username;
-			$no_tlp = $row->no_tlp;
-		}
-		$where = array(
-			'username' => $username,
-			'password' => $password
-			);
-		$cek = $this->M_login->cek_login3("admin",$where)->num_rows();
-		if($cek > 0){
-			$data_session = array(
-				'username' => $username,
-				'id_admin' => $idadmin,
-				'no_tlp' => $no_tlp,
-				'status' => "login"
-				);
-                
-			$this->session->set_userdata($data_session);
-			redirect('Transaksi/penjualan');
- 
-		}else{
-            $this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Berhasil Login :)</div>');
+		
+        $user = $this->db->get_where('admin', ['username' => $username])->row_array();
+        $array = array('username' => $username, 'password' => $password);
+        $pass = $this->db->get_where('admin', $array)->row_array();
+        if ($user > 0) {
+            if ($pass > 0) {
+                if ($pass['level'] == "admin") {
+                    $data_session = array(
+                        'username' => $pass['username'],
+                        'level' => "admin",
+                        'status' => "login"
+                    );
+                    $this->session->set_userdata($data_session);
+                    redirect('Transaksi/pembelian');
+                } else if ($pass['level'] == "karyawan") {
+                    $data_session = array(
+                        'idadmin' => $pass['id_admin'],
+                        'username' => $pass['username'],
+                        'level' => "karyawan",
+                        'status' => "login"
+                    );
+                    $this->session->set_userdata($data_session);
+                    redirect('Transaksi/pembelian');
+                }  
+            } else {
+                $this->session->set_flashdata('password', '<div class="alert alert-danger" role="alert">Password anda salah!</div>');
+                redirect('Login');
+            }
+        } else {
+            $this->session->set_flashdata('username', '<div class="alert alert-danger" role="alert">Username anda salah!</div>');
             redirect('Login');
-		}
+        }
 	}
 
 

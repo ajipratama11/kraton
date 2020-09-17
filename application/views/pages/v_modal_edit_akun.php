@@ -13,16 +13,30 @@ foreach ($query as $q) { ?>
                         </button>
                     </div>
                     <div class="modal-body">
-
-                        <input type="hidden" name="id_admin" value="<?= $q->id_admin; ?>" />
-                        <input type="text" class="form-control" name="username" value="<?= $q->username; ?>" />
-                        <input type="text" class="form-control" name="password" value="<?= $q->password; ?>" />
-                        <input type="text" class="form-control" name="no_tlp" value="<?= $q->no_tlp; ?>" />
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
+                        <div class="form-group row">
+                            <label for="fname" class="col-sm-4  control-label col-form-label">Username</label>
+                            <div class="col-sm-8">
+                            <input type="hidden" name="id_admin" value="<?= $q->id_admin; ?>" />
+                            <input type="text" class="form-control" name="username" value="<?= $q->username; ?>" />
+                            </div>
+                            <br>
+                            <br>
+                            <label for="fname" class="col-sm-4  control-label col-form-label">Password</label>
+                            <div class="col-sm-8">
+                            <input type="text" class="form-control" name="password" value="<?= $q->password; ?>" />
+                            </div>
+                            <br>
+                            <br>
+                            <label for="fname" class="col-sm-4  control-label col-form-label">No Telpon</label>
+                            <div class="col-sm-8">
+                            <input type="text" class="form-control" name="no_tlp" value="<?= $q->no_tlp; ?>" />
+                            <input type="hidden" class="form-control" name="no_tlp" value="<?= $q->level; ?>" />
+                            </div>                         
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
                 </form>
             </div>
         </div>
