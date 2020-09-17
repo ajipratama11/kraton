@@ -137,6 +137,7 @@ class Login extends CI_Controller{
             if ($pass > 0) {
                 if ($pass['level'] == "admin") {
                     $data_session = array(
+                        'id_admin' => $pass['id_admin'],
                         'username' => $pass['username'],
                         'level' => "admin",
                         'status' => "login"
@@ -145,7 +146,7 @@ class Login extends CI_Controller{
                     redirect('Dashboard');
                 } else if ($pass['level'] == "karyawan") {
                     $data_session = array(
-                        'idadmin' => $pass['id_admin'],
+                        'id_admin' => $pass['id_admin'],
                         'username' => $pass['username'],
                         'level' => "karyawan",
                         'status' => "login"
