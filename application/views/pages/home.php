@@ -44,7 +44,8 @@
 
                                 <h1 style="margin-top: 10px;" class="font-light text-white"><i class="fas fa-balance-scale"></i></h1>
                                 <h6 class="text-white">Saldo</h6>
-                                <h2 class="text-white"><?= $saldoawal ?></h2>
+                                <h2 class="text-white">Rp. <?php $format_indonesia = number_format ($saldoawal, 0, ',', '.');
+                                     echo $format_indonesia; ?></h2>
                             </div>
                         </div>
                     </div>

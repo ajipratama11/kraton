@@ -27,7 +27,7 @@ class Pages extends CI_Controller
 	}
 	public function form_tambahbarang()
 	{
-		$param['pageInfo'] = "Example Form";
+		$param['pageInfo'] = "Tambah Barang";
 		$param['kategori'] = $this->db->query("SELECT * FROM kategori")->result();
 		$this->template->load("pages/v_tambahbarang", $param);
 	}
@@ -42,7 +42,7 @@ class Pages extends CI_Controller
 	public function edit_barang()
 	{
 		$kode_barang = $this->uri->segment(3);
-		$param['pageInfo'] = "Edit Form";
+		$param['pageInfo'] = "Edit Barang";
 		$param['kategori'] = $this->db->query("SELECT * FROM kategori")->result();
 		$param['edit'] = $this->db->query("SELECT * FROM barang WHERE kode_barang='$kode_barang'")->result();
 		$this->template->load("pages/v_editbarang",$param);
@@ -56,7 +56,7 @@ class Pages extends CI_Controller
 		$id_kategori = $this->input->post('id_kategori');
 		$nama_kategori = $this->input->post('nama_kategori');
 		$this->db->query("UPDATE `kategori` SET `nama_kategori`='$nama_kategori' WHERE id_kategori='$id_kategori'");
-		$this->session->set_flashdata('updatekategori', '<div class="alert alert-success" role="alert">Barang Berhasil Disimpan :)</div>');
+		$this->session->set_flashdata('updatekategori', '<div class="alert alert-success" role="alert">Kategori Berhasil Diedit :)</div>');
 		redirect('Pages/table_kategori');
 	}
 	public function aksiedit_barang()
@@ -95,7 +95,7 @@ class Pages extends CI_Controller
 	}
 	public function table_barang()
 	{
-		$param['pageInfo'] = "Example Table";
+		$param['pageInfo'] = "Tabel Barang";
 		$param['barang'] = $this->M_barang->get_barang();
 		$this->template->load("pages/v_barang", $param);
 	}
@@ -107,7 +107,7 @@ class Pages extends CI_Controller
 	}
 	public function table_kategori()
 	{
-		$param['pageInfo'] = "Example Table";
+		$param['pageInfo'] = "Tabel Kategori";
 		$param['kategori'] = $this->M_kategori->get_kategori();
 		$this->template->load("pages/v_kategori", $param);
 	}

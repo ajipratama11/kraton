@@ -5,7 +5,7 @@
         <form action="<?= base_url('Transaksi/aksipembelian') ?>" method="POST">
             <div class="row">
                 <div class="col-md-4">
-                    <label for="">Tanggal</label>
+                    <label for="">Tanggal</label>   
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><span class="fa fa-calendar"></span> </span>

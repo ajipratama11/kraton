@@ -28,9 +28,8 @@
                     ?>
                 </select>
             </div>
-            <input style="margin-right: 10px;" name="submit" type="submit" value="Export" class="btn btn-info" />
-            <input style="margin-right: 10px;" name="submit2" type="submit" value="PDF" class="btn btn-info" />
-            <a class="btn btn-info" href="<?php echo base_url(); ?>Laporan/laporanpembelian">Reset</a>
+            <input style="margin-right: 10px;" name="submit" type="submit" value="Cetak Excel" class="btn btn-info" />
+            <input style="margin-right: 10px;" name="submit2" type="submit" value="Cetak PDF" class="btn btn-info" />
         </form>
         <br>
         <div class="table-responsive">

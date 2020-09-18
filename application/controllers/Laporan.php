@@ -471,7 +471,7 @@ class Laporan extends CI_Controller
             exit;
         } else if ($this->input->post('submit2')) {
 
-                $param['pageInfo'] = "List Buku Besar";
+                $param['pageInfo'] = "List Laba Rugi";
                 $param['tanggal'] = "Tahun ".$tahun." Bulan ".$bulan;
                 $param['penjualan'] = $penjualan[0]->total;
                 $param['potongan'] = $potongan[0]->total;

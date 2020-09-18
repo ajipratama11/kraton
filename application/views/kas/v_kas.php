@@ -13,6 +13,7 @@
             <br>
             <label>Jenis</label>
             <select name="jenis" id="" class="form-control select2">
+                <option value="kredit" disabled selected>--Pilih Jenis--</option>
                 <option value="kredit">Kredit</option>
                 <option value="debit">Debit</option>
             </select>

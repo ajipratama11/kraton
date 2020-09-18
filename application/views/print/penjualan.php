@@ -26,6 +26,7 @@
 </head>
 <div class="card shadow py-2">
     <div class="card-body">
+    <center><h3>Laporan Penjualan</h3></center>
         <div class="table-responsive">
             <table class="table table-striped table-hover table-bordered table-custom">
                 <thead>

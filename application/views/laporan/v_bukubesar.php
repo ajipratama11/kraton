@@ -18,16 +18,18 @@
                     <option value="12">Desember</option>
                 </select>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2">  
                 <select class="form-control" name="tahun" id="tahun" required>
-                    <option value="2020">2020</option>
-                    <option value="2021">2021</option>
-                    <option value="2022">2022</option>
+                <?php 
+                        $yearNow = (int)date('Y');
+                        for($i=$yearNow;$i>=$yearNow-10;$i--){
+                            echo "<option>$i</option>";
+                        }
+                    ?>
                 </select>
             </div>
-            <input style="margin-right: 10px;" name="submit" type="submit" value="Export" class="btn btn-info" />
-            <input style="margin-right: 10px;" name="submit2" type="submit" value="PDF" class="btn btn-info" />
-            <a class="btn btn-info" href="<?php echo base_url(); ?>Laporan/laporanpembelian">Reset</a>
+            <input style="margin-right: 10px;" name="submit" type="submit" value="Cetak Excel" class="btn btn-info" />
+            <input style="margin-right: 10px;" name="submit2" type="submit" value="Cetak PDF" class="btn btn-info" />
         </form>
         <br>
         <div class="table-responsive">

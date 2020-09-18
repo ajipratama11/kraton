@@ -7,7 +7,7 @@ foreach ($query as $q) { ?>
             <div class="modal-content">
                 <form action="<?= base_url('Pages/aksiedit_kategori'); ?>" method="POST">
                     <div class="modal-header">
-                        <h5 class="modal-title">Modal title</h5>
+                        <h5 class="modal-title">Edit Kategori</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -18,8 +18,8 @@ foreach ($query as $q) { ?>
                         <input type="text" class="form-control" name="nama_kategori" value="<?= $q->nama_kategori; ?>" />
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                     </div>
                 </form>
             </div>

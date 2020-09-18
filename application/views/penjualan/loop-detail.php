@@ -45,16 +45,27 @@
         <label for="">Keterangan</label>
         <input type="text" name='keterangan[]' class="form-control" value='<?= $value['keterangan'] ?>'>
     </div>
-    <div class="col-md-<?= isset($start) ? '4' : '3' ?>">
+    <div class="col-md-<?= $start==1 ? '4' : '3' ?>">
         <label for="">Subtotal</label>
         <input type="text" name='subtotal[]' class="form-control subtotal" id='subtotal<?= $now ?>' value='<?= $value['subtotal'] ?>' readonly>
     </div>
     <?php
-    if (empty($start)) {
+    if ($start!=1) {
     ?>
         <div class="col-md-1">
             <br>
-            <a href="" data-target='<?= $now; ?>' class="btn btn-danger mt-2 removeField">Hapus</a>
+            <?php 
+                if(isset($edit)){
+            ?>
+                <a href="" data-target='<?= $now; ?>' class="btn btn-danger mt-2 removeField editRemoveField" data-id='<?= $value['id_detail'] ?>'>Hapus</a>
+            <?php
+                }
+                else{
+            ?>
+                <a href="" data-target='<?= $now; ?>' class="btn btn-danger mt-2 removeField">Hapus</a>
+            <?php
+                }
+            ?>
         </div>
     <?php } ?>
 </div>

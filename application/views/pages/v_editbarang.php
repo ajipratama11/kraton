@@ -6,7 +6,7 @@
         <form action="<?= base_url('Pages/aksiedit_barang'); ?>" method="POST" enctype="multipart/form-data">
         <?php $yahoo = md5(uniqid(rand(), true)) ?>
             <label>Nama Barang</label>
-            <input name="kode_barang" value="<?= $b->kode_barang; ?>" type="text" placeholder="Nama Barang" class="form-control">
+            <input name="kode_barang" value="<?= $b->kode_barang; ?>" type="hidden" placeholder="Nama Barang" class="form-control">
             <input name="nama_barang" value="<?= $b->nama_barang; ?>" type="text" placeholder="Nama Barang" class="form-control">
             <br>
             <label>Kategori Barang</label>

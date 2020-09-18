@@ -2,6 +2,9 @@
     <div class="card-body">
         <a href="<?php echo base_url() . "transaksi/listpenjualan" ?>" class="btn btn-success mb-3"> <span class="fa fa-arrow-alt-circle-left"></span> List Penjualan</a>
         <hr>
+        <?php 
+            $this->load->view('pages/alert');
+        ?>
         <form action="<?= base_url('Transaksi/aksieditpenjualan') ?>" method="POST">
             <div class="row">
                 <?php foreach ($jual as $g) { ?>

@@ -11,7 +11,7 @@
                         <td>No</td>
                         <td>Kode Pembelian</td>
                         <td>Tanggal Pembelian</td>
-                        <td>Harga Satuan</td>
+                        <td>Total</td>
                         <td>Admin</td>
                         <td>Option</td>
                     </tr>
