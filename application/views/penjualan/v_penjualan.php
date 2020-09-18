@@ -69,7 +69,6 @@
                         <input type="number" name="potongan" class="form-control totalKembalian" id='inputPotongan' value='0'>
                     </div>
                 </div>
-            
             </div>
 
             <div class="mt-3">
@@ -80,3 +79,6 @@
         </form>
     </div>
 </div>
+<script>
+    document.querySelector('body').classList.add('bodyPenjualan')
+</script>

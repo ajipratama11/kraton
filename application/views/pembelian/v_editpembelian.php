@@ -41,7 +41,7 @@
                 </div>
             <?php } ?>
             <hr>
-            <div class="loop-detail" data-counting='1'>
+            <div class="loop-detail" data-counting='<?php echo count($detail) ?>'>
                 <?php
                 foreach ($detail as $key  => $data) {
                     $key++;

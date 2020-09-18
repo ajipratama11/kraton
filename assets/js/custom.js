@@ -65,6 +65,8 @@ $(document).ready(function () {
 	function setHarga(thisParam) {
 		var thisVal = thisParam.find(":selected").data("idr");
 		var target = thisParam.data("target");
+		console.log(thisVal)
+		console.log(target)
 		$(target).val(thisVal);
 	}
 	$(".setHarga").change(function () {
@@ -157,6 +159,8 @@ $(document).ready(function () {
 	
 	$(".qtyHarga").keyup(function () {
 		qtyHarga($(this));
+			$("#total").html(rupiah(getPotongan()));
+			$("#kembalian").html(rupiah(getKembalian()));
 	});
 
 	function rupiah(nominal) {
@@ -209,6 +213,8 @@ $(document).ready(function () {
 	$(".editRemoveField").click(function(e){
 		e.preventDefault()
 		var id = $(this).data('id')
+		$("#total").html(rupiah(getPotongan()));
+		$("#kembalian").html(rupiah(getKembalian()));
 
 		$(".deletedId").append(`<input type='hidden' name='id_delete[]' value='${id}'>`)
 	})

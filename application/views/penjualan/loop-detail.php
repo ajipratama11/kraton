@@ -16,7 +16,7 @@
     <div class="col-md-3">
         <?php
         if (isset($edit)) {
-            echo "<input type='hidden' name='id_detail[]' value='$value[id_detail]'";
+            echo "<input type='hidden' name='id_detail[]' value='$value[id_detail]'>";
         }
         ?>
         <label for="">Kode Barang</label>
