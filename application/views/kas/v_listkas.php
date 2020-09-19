@@ -31,7 +31,7 @@
                                 <?php
                                 $dropdown['link'] = array(
                                     "Edit" => base_url() ."Transaksi/vkas/".$g->kode_kas,
-                                    "Hapus" => base_url() ."Transaksi/hapuskas/".$g->kode_kas
+                                    "Hapus" => array('confirm',base_url() ."Transaksi/hapuskas/".$g->kode_kas)
                                 );
                                 $this->load->view("common/dropdown", $dropdown);
                                 ?>

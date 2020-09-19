@@ -29,7 +29,7 @@
                                 <?php
                                 $dropdown['link'] = array(
                                     "Edit" => base_url() ."Transaksi/editpembelian/".$g->kode_pembelian,
-                                    "Delete" => base_url() ."Transaksi/deletepembelian/".$g->kode_pembelian,
+                                    "Delete" => array('confirm',base_url() ."Transaksi/deletepembelian/".$g->kode_pembelian)
                                 );
                                 $this->load->view("common/dropdown", $dropdown);
                                 ?>

@@ -33,7 +33,7 @@
                             <?php 
                                 $dropdown['link'] = array(
                                     "Edit" => base_url('Pages/edit_barang/'.$g->kode_barang),
-                                    "Delete" => base_url('Pages/delete_barang/'.$g->kode_barang)
+                                    "Delete" => array('confirm',base_url('Pages/delete_barang/'.$g->kode_barang))
                                 );
                                 $this->load->view("common/dropdown", $dropdown);
                             ?>

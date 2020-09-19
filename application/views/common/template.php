@@ -37,7 +37,7 @@
           <div class="sidebar-brand-icon">
             <i class="fas fa-desktop"></i>
           </div>
-          <div class="sidebar-brand-text mx-3">E-Kasir <sup><small> Kraton</small></sup></div>
+          <div class="sidebar-brand-text mx-3">E-Kasir <sup><small> BUMDesa RAMAI JAYA</small></sup></div>
         </a>
 
         <!-- Nav Item - Dashboard -->
@@ -94,12 +94,12 @@
             </div>
           </div>
         </li>
-        <?php if($this->session->userdata('level') == 'admin') { ?>
-        <li class="nav-item">
-          <a class="nav-link" href="<?= base_url('Pages/table_akun'); ?>">
-            <i class="fas fa-fw fa-users"></i>
-            <span>Akun</span></a>
-        </li>
+        <?php if ($this->session->userdata('level') == 'admin') { ?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url('Pages/table_akun'); ?>">
+              <i class="fas fa-fw fa-users"></i>
+              <span>Akun</span></a>
+          </li>
         <?php } ?>
 
 
@@ -161,9 +161,9 @@
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                
-                
-                
+
+
+
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
