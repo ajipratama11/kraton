@@ -82,7 +82,8 @@ class Transaksi extends CI_Controller
 		$this->template->load("kas/v_editkas", $param);
 	}
 
-	public function tambah_kas(){
+	public function tambah_kas()
+	{
 		$kode_kas = $this->M_kas->get_idkas();
 		$this->M_kas->addKas($kode_kas);
 		$this->M_bukubesar->addkasbukubesar($kode_kas);
@@ -93,12 +94,21 @@ class Transaksi extends CI_Controller
 	{
 		$kode_kas = $this->input->post('kode_kas');
 		$this->M_kas->updateKas($kode_kas);
+		$bukuBesar = array(
+			'tanggal' => $_POST['tanggal_kas'],
+			'nominal' => $_POST['nominal'],
+			'keterangan' => $_POST['keterangan']
+		);
+		$this->common->update('buku_besar', $bukuBesar, ['kode_transaksi' => $kode_kas]); //update buku besar
+
 		$this->session->set_flashdata('editkas', '<div class="alert alert-warning" role="alert">kas Berhasil Di edit :)</div>');
 		redirect('Transaksi/listkas');
 	}
-	public function hapuskas(){
+	public function hapuskas()
+	{
 		$kode_kas = $this->uri->segment(3);
 		$this->M_kas->deleteKas($kode_kas);
+		$this->db->delete('buku_besar', array('kode_transaksi' => $kode_kas));
 		$this->session->set_flashdata('hapuskas', '<div class="alert alert-danger" role="alert">Kas Berhasil dihapus :)</div>');
 		redirect('Transaksi/listkas');
 	}
@@ -110,11 +120,11 @@ class Transaksi extends CI_Controller
 	}
 	public function addDetailPembelian()
 	{
-		$this->load->view("pembelian/loop-detail", ['now' => $_GET['counting'],'start' => 0]);
+		$this->load->view("pembelian/loop-detail", ['now' => $_GET['counting'], 'start' => 0]);
 	}
 	public function addDetailPenjualan()
 	{
-		$this->load->view("penjualan/loop-detail", ['now' => $_GET['counting'],'start' => 0]);
+		$this->load->view("penjualan/loop-detail", ['now' => $_GET['counting'], 'start' => 0]);
 	}
 
 	public function listpembelian()
@@ -125,7 +135,7 @@ class Transaksi extends CI_Controller
 	}
 
 
-	
+
 	public function listpenjualan()
 	{
 
@@ -191,19 +201,21 @@ class Transaksi extends CI_Controller
 	}
 
 
-	public function deletepembelian(){
+	public function deletepembelian()
+	{
 		$id = $this->uri->segment(3);
-		$this->db->delete('pembelian', array('kode_pembelian' => $id)); 
-		$this->db->delete('detail_pembelian', array('kode_pembelian' => $id)); 
-		$this->db->delete('buku_besar', array('kode_transaksi' => $id)); 
+		$this->db->delete('pembelian', array('kode_pembelian' => $id));
+		$this->db->delete('detail_pembelian', array('kode_pembelian' => $id));
+		$this->db->delete('buku_besar', array('kode_transaksi' => $id));
 		$this->session->set_flashdata('deletepembelian', '<div class="alert alert-success" role="alert">Pembelian Berhasil Di Hapus</div>');
-		redirect('transaksi/pembelian');		
+		redirect('transaksi/pembelian');
 	}
-	public function deletepenjualan(){
+	public function deletepenjualan()
+	{
 		$id = $this->uri->segment(3);
-		$this->db->delete('penjualan', array('kode_penjualan' => $id)); 
-		$this->db->delete('detail_penjualan', array('kode_penjualan' => $id)); 
-		$this->db->delete('buku_besar', array('kode_transaksi' => $id)); 
+		$this->db->delete('penjualan', array('kode_penjualan' => $id));
+		$this->db->delete('detail_penjualan', array('kode_penjualan' => $id));
+		$this->db->delete('buku_besar', array('kode_transaksi' => $id));
 		$this->session->set_flashdata('deletepenjualan', '<div class="alert alert-success" role="alert">Penjualan Berhasil Di Hapus</div>');
 		redirect('transaksi/penjualan');
 	}
@@ -266,24 +278,24 @@ class Transaksi extends CI_Controller
 			'id_admin' => $_SESSION['id_admin'],
 			'keterangan' => $_POST['keterangan2'],
 		);
-		$this->common->update('pembelian', $pembelian,['kode_pembelian' => $kode_pembelian]); //update pembelian
+		$this->common->update('pembelian', $pembelian, ['kode_pembelian' => $kode_pembelian]); //update pembelian
 		$bukuBesar = array(
 			'tanggal' => $_POST['tanggal_beli'],
 			'nominal' => $total,
 			'keterangan' => $_POST['keterangan2']
 		);
-		$this->common->update('buku_besar', $bukuBesar,['kode_transaksi' => $kode_pembelian]); //update buku besar
+		$this->common->update('buku_besar', $bukuBesar, ['kode_transaksi' => $kode_pembelian]); //update buku besar
 
-		
-		if(isset($_POST['id_delete'])){
+
+		if (isset($_POST['id_delete'])) {
 			foreach ($_POST['id_delete'] as $key => $value) {
-				$barangDelete = $this->common->getData('qty,kode_barang','detail_pembelian','',['id_detail' => $value],'','')[0];
+				$barangDelete = $this->common->getData('qty,kode_barang', 'detail_pembelian', '', ['id_detail' => $value], '', '')[0];
 				$stokValue = $barangDelete['qty'];
 				$this->db->query("UPDATE barang SET stok=stok-$stokValue WHERE kode_barang='$barangDelete[kode_barang]'");
-				$this->common->delete('detail_pembelian',['id_detail' => $value]);
+				$this->common->delete('detail_pembelian', ['id_detail' => $value]);
 			}
 		}
-	 	foreach ($_POST['kode_barang'] as $key => $value) {
+		foreach ($_POST['kode_barang'] as $key => $value) {
 			$data = [
 				'kode_pembelian' => $kode_pembelian,
 				'kode_barang' => $this->input->post('kode_barang')[$key],
@@ -291,32 +303,30 @@ class Transaksi extends CI_Controller
 				'harga_satuan' => $this->input->post('harga_satuan')[$key],
 				'keterangan' => $this->input->post('keterangan')[$key],
 			];
-			if(isset($_POST['id_detail'][$key])){
+			if (isset($_POST['id_detail'][$key])) {
 				$data['id_detail'] = $this->input->post('id_detail')[$key];
-				$getDetail = $this->common->getData('qty','detail_pembelian','',['id_detail' => $data['id_detail']],'','')[0];
-				if($getDetail['qty']!=$data['qty']){
+				$getDetail = $this->common->getData('qty', 'detail_pembelian', '', ['id_detail' => $data['id_detail']], '', '')[0];
+				if ($getDetail['qty'] != $data['qty']) {
 					$kode_barang = $data['kode_barang'];
-					if($getDetail['qty']>$data['qty']){
+					if ($getDetail['qty'] > $data['qty']) {
 						$selisih = $getDetail['qty'] - $data['qty'];
 						$this->db->query("UPDATE barang SET stok=stok-$selisih WHERE kode_barang='$kode_barang'");
-					}
-					else{
+					} else {
 						$selisih = $data['qty'] - $getDetail['qty'];
 						$this->db->query("UPDATE barang SET stok=stok+$selisih WHERE kode_barang='$kode_barang'");
 					} //update stok
 				}
-				$this->common->update('detail_pembelian', $data,['id_detail' => $data['id_detail']]); //update detail pembelian
-			}
-			else{
+				$this->common->update('detail_pembelian', $data, ['id_detail' => $data['id_detail']]); //update detail pembelian
+			} else {
 				$qty = $data['qty'];
 				$kode_barang = $data['kode_barang'];
 				$this->db->query("UPDATE barang SET stok=stok+$qty WHERE kode_barang='$kode_barang'"); //update stok
-				$this->common->insert('detail_pembelian',$data); //insert new detail pembelian
+				$this->common->insert('detail_pembelian', $data); //insert new detail pembelian
 			}
 		}
-			
+
 		$this->session->set_flashdata('msg', 'Pembelian Berhasil Diupdate');
-		redirect('pembelian/edit/'.$kode_pembelian);
+		redirect('pembelian/edit/' . $kode_pembelian);
 	}
 	public function aksieditpenjualan()
 	{
@@ -344,20 +354,20 @@ class Transaksi extends CI_Controller
 			'id_admin' => $_POST['id_admin'],
 			'keterangan' => $_POST['keterangan2'],
 		);
-		$this->common->update('penjualan', $penjualan,['kode_penjualan' => $kode_penjualan]); //update penjualan
+		$this->common->update('penjualan', $penjualan, ['kode_penjualan' => $kode_penjualan]); //update penjualan
 		$bukuBesar = array(
 			'tanggal' => $_POST['tanggal_jual'],
 			'nominal' => $total,
 			'keterangan' => $_POST['keterangan2']
 		);
-		$this->common->update('buku_besar', $bukuBesar,['kode_transaksi' => $kode_penjualan]); //update buku besar
+		$this->common->update('buku_besar', $bukuBesar, ['kode_transaksi' => $kode_penjualan]); //update buku besar
 
-		if(isset($_POST['id_delete'])){
+		if (isset($_POST['id_delete'])) {
 			foreach ($_POST['id_delete'] as $key => $value) {
-				$barangDelete = $this->common->getData('qty,kode_barang','detail_penjualan','',['id_detail' => $value],'','')[0];
+				$barangDelete = $this->common->getData('qty,kode_barang', 'detail_penjualan', '', ['id_detail' => $value], '', '')[0];
 				$stokValue = $barangDelete['qty'];
 				$this->db->query("UPDATE barang SET stok=stok+$stokValue WHERE kode_barang='$barangDelete[kode_barang]'");
-				$this->common->delete('detail_penjualan',['id_detail' => $value]);
+				$this->common->delete('detail_penjualan', ['id_detail' => $value]);
 			}
 		}
 		foreach ($_POST['kode_barang'] as $key => $value) {
@@ -368,31 +378,29 @@ class Transaksi extends CI_Controller
 				'harga_satuan' => $this->input->post('harga_satuan')[$key],
 				'keterangan' => $this->input->post('keterangan')[$key],
 			];
-			if(isset($_POST['id_detail'][$key])){
+			if (isset($_POST['id_detail'][$key])) {
 				$data['id_detail'] = $this->input->post('id_detail')[$key];
-				$getDetail = $this->common->getData('qty','detail_penjualan','',['id_detail' => $data['id_detail']],'','')[0];
-				if($getDetail['qty']!=$data['qty']){
+				$getDetail = $this->common->getData('qty', 'detail_penjualan', '', ['id_detail' => $data['id_detail']], '', '')[0];
+				if ($getDetail['qty'] != $data['qty']) {
 					$kode_barang = $data['kode_barang'];
-					if($getDetail['qty']>$data['qty']){
+					if ($getDetail['qty'] > $data['qty']) {
 						$selisih = $getDetail['qty'] - $data['qty'];
 						$this->db->query("UPDATE barang SET stok=stok+$selisih WHERE kode_barang='$kode_barang'");
-					}
-					else{
+					} else {
 						$selisih = $data['qty'] - $getDetail['qty'];
 						$this->db->query("UPDATE barang SET stok=stok-$selisih WHERE kode_barang='$kode_barang'");
 					} //update stok
 				}
-				$this->common->update('detail_penjualan', $data,['id_detail' => $data['id_detail']]); //update detail pembelian
-			}
-			else{
+				$this->common->update('detail_penjualan', $data, ['id_detail' => $data['id_detail']]); //update detail pembelian
+			} else {
 				$qty = $data['qty'];
 				$kode_barang = $data['kode_barang'];
 				$this->db->query("UPDATE barang SET stok=stok-$qty WHERE kode_barang='$kode_barang'"); //update stok
-				$this->common->insert('detail_penjualan',$data); //insert new detail pembelian
+				$this->common->insert('detail_penjualan', $data); //insert new detail pembelian
 			}
 		}
-		
+
 		$this->session->set_flashdata('msg', 'Pembelian Berhasil Diupdate');
-		redirect('penjualan/edit/'.$kode_penjualan);
+		redirect('penjualan/edit/' . $kode_penjualan);
 	}
 }

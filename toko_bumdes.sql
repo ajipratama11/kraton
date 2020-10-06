@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 14 Sep 2020 pada 07.51
+-- Waktu pembuatan: 19 Sep 2020 pada 03.25
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.2.26
 
@@ -32,15 +32,17 @@ CREATE TABLE `admin` (
   `id_admin` int(11) NOT NULL,
   `username` varchar(35) NOT NULL,
   `password` varchar(35) NOT NULL,
-  `no_tlp` varchar(14) NOT NULL
+  `no_tlp` varchar(14) NOT NULL,
+  `level` enum('admin','karyawan') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `admin`
 --
 
-INSERT INTO `admin` (`id_admin`, `username`, `password`, `no_tlp`) VALUES
-(1, 'aji', 'aji', '12');
+INSERT INTO `admin` (`id_admin`, `username`, `password`, `no_tlp`, `level`) VALUES
+(1, 'admin', 'admin', '12', 'admin'),
+(3, 'aji', 'aji', '098', 'karyawan');
 
 -- --------------------------------------------------------
 
@@ -62,10 +64,10 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`kode_barang`, `nama_barang`, `id_kategori`, `harga_jual`, `stok`, `keterangan`) VALUES
-('RJ0001', 'Pensil', 'KB0002', 3500, 40, 'kaskasasas'),
-('RJ0002', 'Penghapus', 'KB0002', 1500, 13, 'asasas'),
+('RJ0002', 'Penghapus', 'KB0002', 1500, 17, 'asasas'),
 ('RJ0003', 'Pulpen', 'KB0002', 2000, 25, 'asas'),
-('RJ0004', 'Teh Gelas', 'KB0004', 2000, 17, 'asas');
+('RJ0004', 'Teh Gelas', 'KB0004', 2000, 17, 'asas'),
+('RJ0005', 'TipeX', 'KB0002', 3000, 12, 'asas');
 
 -- --------------------------------------------------------
 
@@ -90,17 +92,15 @@ CREATE TABLE `buku_besar` (
 INSERT INTO `buku_besar` (`id_bukubesar`, `kode_transaksi`, `tipe`, `tanggal`, `nominal`, `jenis`, `keterangan`) VALUES
 (1, 'KS0002', 'kas', '2020-09-10', 100000, 'kredit', 'Baik baik aja'),
 (2, 'KS0003', 'kas', '2020-09-09', 20000, 'debit', 'as'),
-(3, 'PB0006', 'pembelian', '2020-09-10', 8000, 'kredit', 'dada'),
-(4, 'PB0007', 'pembelian', '2020-08-01', 100000, 'kredit', ''),
+(3, 'PB0006', 'pembelian', '2020-09-10', 0, 'kredit', 'dada'),
+(4, 'PB0007', 'pembelian', '2020-08-01', 0, 'kredit', ''),
 (5, 'PJ0005', 'penjualan', '2020-08-01', 200000, 'debit', ''),
-(6, 'PB0008', 'pembelian', '2020-10-14', 17500, 'kredit', ''),
-(7, 'PB0009', 'pembelian', '2020-09-16', 12000, 'kredit', 'kk'),
 (8, 'PB0010', 'pembelian', '2020-09-17', 28000, 'kredit', 'dada'),
 (9, 'PJ0006', 'penjualan', '2020-10-15', 3500, 'debit', 'dada'),
-(10, 'PJ0007', 'penjualan', '2020-10-10', 3500, 'debit', 'dada'),
+(10, 'PJ0007', 'penjualan', '2020-10-10', 5000, 'debit', 'dada'),
 (11, 'PJ0008', 'penjualan', '2020-10-16', 8500, 'debit', 'dada'),
-(12, 'PJ0009', 'penjualan', '2020-09-16', 14500, 'debit', 'dada'),
-(13, 'PJ0010', 'penjualan', '2020-10-19', 38500, 'debit', 'dada');
+(14, 'PB0008', 'pembelian', '2020-10-17', 41500, 'kredit', 'dada'),
+(15, 'KS0004', 'kas', '2020-10-18', 20000, 'debit', 'sas');
 
 -- --------------------------------------------------------
 
@@ -122,20 +122,17 @@ CREATE TABLE `detail_pembelian` (
 --
 
 INSERT INTO `detail_pembelian` (`id_detail`, `kode_pembelian`, `kode_barang`, `qty`, `harga_satuan`, `keterangan`) VALUES
-(11, 'PB0001', 'RJ0004', 2, 1000, 'baik'),
+(11, 'PB0001', 'RJ0004', 2, 3000, 'baik'),
 (12, 'PB0001', 'RJ0003', 3, 1400, 'baik'),
 (13, 'PB0002', 'RJ0001', 5, 1000, 'baik'),
 (14, 'PB0003', 'RJ0003', 10, 1000, 'baik'),
-(16, 'PB0004', 'RJ0001', 2, 1000, 'baik'),
-(17, 'PB0005', 'RJ0001', 2, 2000, 'baik'),
-(18, 'PB0006', 'RJ0001', 2, 1000, 'baik'),
+(16, 'PB0004', 'RJ0001', 7, 1000, 'baik'),
+(17, 'PB0005', 'RJ0001', 12, 2000, 'baik'),
+(18, 'PB0006', 'RJ0001', 2, 2000, 'baik'),
 (19, 'PB0006', 'RJ0003', 3, 2000, 'baik'),
-(20, 'PB0007', 'RJ0002', 10, 10000, ''),
-(21, 'PB0008', 'RJ0001', 2, 2000, 'baik'),
-(22, 'PB0008', 'RJ0003', 9, 1500, 'baik'),
-(23, 'PB0009', 'RJ0002', 9, 1000, 'baik'),
-(24, 'PB0009', 'RJ0003', 2, 1500, 'baik'),
-(25, 'PB0010', 'RJ0001', 14, 2000, 'baik');
+(20, 'PB0007', 'RJ0002', 10, 20000, ''),
+(26, 'PB0008', 'RJ0001', 4, 10000, 'baik'),
+(27, 'PB0008', 'RJ0002', 1, 1500, 'baik');
 
 -- --------------------------------------------------------
 
@@ -168,8 +165,8 @@ INSERT INTO `detail_penjualan` (`id_detail`, `kode_penjualan`, `kode_barang`, `q
 (9, 'PJ0005', 'RJ0001', 20, 10000, ''),
 (10, 'PJ0006', 'RJ0001', 1, 3500, 'baik'),
 (11, 'PJ0007', 'RJ0003', 1, 2000, 'baik'),
-(12, 'PJ0007', 'RJ0002', 1, 1500, 'baik'),
-(13, 'PJ0008', 'RJ0001', 2, 3500, 'baik'),
+(12, 'PJ0007', 'RJ0002', 2, 1500, 'baik'),
+(13, 'PJ0008', 'RJ0001', 2, 5500, 'baik'),
 (14, 'PJ0008', 'RJ0002', 1, 1500, 'baik'),
 (15, 'PJ0009', 'RJ0002', 3, 1500, 'baik'),
 (16, 'PJ0009', 'RJ0003', 5, 2000, 'baik'),
@@ -217,7 +214,7 @@ CREATE TABLE `kategori` (
 
 INSERT INTO `kategori` (`id_kategori`, `nama_kategori`) VALUES
 ('KB0001', 'Aksesoris'),
-('KB0002', 'ATK'),
+('KB0002', 'Alat Tulis'),
 ('KB0004', 'Minuman'),
 ('KB0005', 'Makanan');
 
@@ -240,16 +237,14 @@ CREATE TABLE `pembelian` (
 --
 
 INSERT INTO `pembelian` (`kode_pembelian`, `tanggal_pembelian`, `total`, `id_admin`, `keterangan`) VALUES
-('PB0001', '2020/09/10', 6200, 1, ''),
+('PB0001', '2020/09/10', 0, 1, ''),
 ('PB0002', '2020/09/22', 5000, 1, ''),
 ('PB0003', '2020/09/29', 20000, 1, ''),
-('PB0004', '2020/10/16', 2000, 1, 'dadaadadad'),
-('PB0005', '2020/10/10', 4000, 1, ''),
-('PB0006', '2020/10/10', 8000, 1, 'dada'),
-('PB0007', '2020/10/01', 100000, 1, ''),
-('PB0008', '2020/10/14', 17500, 1, ''),
-('PB0009', '2020/09/16', 12000, 1, 'kk'),
-('PB0010', '2020/09/17', 28000, 1, 'dada');
+('PB0004', '2020/10/16', 7000, 1, 'dsdadaadadad'),
+('PB0005', '2020/10/10', 24000, 1, ''),
+('PB0006', '2020/10/10', 0, 0, 'dada'),
+('PB0007', '2020/10/01', 0, 0, ''),
+('PB0008', '2020/10/17', 41500, 1, 'dada');
 
 -- --------------------------------------------------------
 
@@ -280,8 +275,8 @@ INSERT INTO `penjualan` (`kode_penjualan`, `tanggal_penjualan`, `nama_pembeli`, 
 ('PJ0004', '2020/09/22', 'Mega Silvia', 7, 15000, 20000, 2000, 1, ''),
 ('PJ0005', '2020/09/01', 'aji', 20, 200000, 200000, 0, 1, ''),
 ('PJ0006', '2020/10/15', 'Aji ', 1, 3500, 10000, 1000, 1, 'dada'),
-('PJ0007', '2020/10/10', 'Mega Silvia', 2, 3500, 5000, 0, 1, 'dada'),
-('PJ0008', '2020/10/16', 'Aji ', 3, 8500, 10000, 2000, 1, 'dada'),
+('PJ0007', '2020/10/10', 'Mega Silvia', 3, 5000, 10000, 0, 1, 'dada'),
+('PJ0008', '2020/10/16', 'Aji ', 3, 0, 10000, 2000, 1, 'dada'),
 ('PJ0009', '2020/09/16', 'Aji ', 8, 14500, 20000, 3000, 1, 'dada'),
 ('PJ0010', '2020/10/19', 'Aji ', 13, 38500, 50000, 5000, 1, 'dada');
 
@@ -351,19 +346,19 @@ ALTER TABLE `penjualan`
 -- AUTO_INCREMENT untuk tabel `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `buku_besar`
 --
 ALTER TABLE `buku_besar`
-  MODIFY `id_bukubesar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_bukubesar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `detail_pembelian`
 --
 ALTER TABLE `detail_pembelian`
-  MODIFY `id_detail` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_detail` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT untuk tabel `detail_penjualan`
