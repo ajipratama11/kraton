@@ -63,11 +63,11 @@
             <i class="fas fa-fw fa-shopping-cart"></i>
             <span>Penjualan Barang</span></a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="<?php echo base_url() . 'transaksi/kas' ?>">
             <i class="fas fa-fw fa-wallet"></i>
             <span>Kas</span></a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cube"></i>
@@ -93,13 +93,13 @@
               <a class="collapse-item" href="<?php echo base_url() . 'Laporan/laporanlabarugi' ?>">Laba Rugi</a>
             </div>
           </div>
-        </li>
+        <!-- </li>
         <?php if ($this->session->userdata('level') == 'admin') { ?>
           <li class="nav-item">
             <a class="nav-link" href="<?= base_url('Pages/table_akun'); ?>">
               <i class="fas fa-fw fa-users"></i>
               <span>Akun</span></a>
-          </li>
+          </li> -->
         <?php } ?>
 
 

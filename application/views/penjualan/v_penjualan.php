@@ -10,7 +10,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><span class="fa fa-calendar"></span> </span>
                         </div>
-                        <input type="text" name="tanggal_jual" class="form-control datepicker">
+                        <input type="text" value="<?= date("d-m-Y H:i:s") ?>" name="tanggal_jual" class="form-control datepicker">
                     </div>
                 </div>
                 <div class="col-md-4">
